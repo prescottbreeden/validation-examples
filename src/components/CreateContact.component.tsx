@@ -7,8 +7,7 @@ import {DynamicPhone} from './DynamicPhone.component';
 import {Box, Button, FlexColumn, FlexRow, Input, Label } from 'layouts';
 import {prop} from 'de-formed-validations';
 
-interface CreateContactProps {}
-export const CreateContact: FC<CreateContactProps> = (props) => {
+export const CreateContact: FC = () => {
   // -- dependencies -----------------------------------------------------------
   const v = ContactValidation();
 
