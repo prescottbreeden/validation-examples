@@ -1,0 +1,54 @@
+$color-tech-white: #f3f7f7;
+
+.form {
+
+  &__row {
+    display: flex;
+    width: 100%;
+    align-content: center;
+    margin-bottom: 2.4rem;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__label {
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  &__input {
+    font-size: 2rem;
+    height: 5.4rem;
+    width: 100%;
+    border-radius: $default-border-radius;
+    border: solid 0.1rem $color-blue;
+    background-color: $color-tech-white;
+    line-height: 1.57;
+    letter-spacing: normal;
+    padding: 1.2rem;
+    transition: box-shadow 0.2s ease-in-out;
+    color: $color-low-dark;
+
+    &:not(disabled):focus {
+      outline: 0;
+      box-shadow: 0 0 0 .1rem $color-blue;
+    }
+  }
+
+  &__box {
+    position: relative;
+  }
+
+  &__error {
+    margin-top: .4rem;
+    color: $color-red;
+  }
+}
+
