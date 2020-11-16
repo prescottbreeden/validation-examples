@@ -10,14 +10,16 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
-    "de-formed-validations": "^2.0.3",
+    "@types/yup": "^0.29.9",
+    "de-formed-validations": "^2.0.5",
     "node-sass": "^5.0.0",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
     "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "yarn compile:sass & react-scripts start",

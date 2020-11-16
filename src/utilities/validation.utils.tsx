@@ -56,7 +56,7 @@ export function validationErrors<T>(v: ValidationObject<T>) {
   ), v.validationErrors);
 }
 
-export function readValidationError<T>( v: ValidationObject<T>) {
+export function displayValidationError<T>( v: ValidationObject<T>) {
   return function(prop: keyof T) {
     return v.getError(prop) ? (
       <p className="form__error">{v.getError(prop)}</p>

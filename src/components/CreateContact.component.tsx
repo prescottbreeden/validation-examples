@@ -1,21 +1,21 @@
 import React, { FC, useState } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { Contact, emptyContact, emptyPhone, Phone } from 'types';
-import { compose, display, handleChangeEvent, readValidationError, upsert, validationErrors } from 'utilities';
-import {ContactValidation} from 'validations/contact.validation';
+import { compose, display, handleChangeEvent, displayValidationError, upsert, validationErrors } from 'utilities';
+import {ContactValidation } from 'validations/contact.validation';
 import {DynamicPhone} from './DynamicPhone.component';
 import {Box, Button, FlexColumn, FlexRow, Input, Label } from 'layouts';
 import {prop} from 'de-formed-validations';
 
 export const CreateContact: FC = () => {
-  // -- dependencies -----------------------------------------------------------
+  // -- dependencies --
   const v = ContactValidation();
 
-  // -- local states -----------------------------------------------------------
+  // -- local states --
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
   const [contact, setContact] = useState<Contact>(emptyContact());
 
-  // -- component logic --------------------------------------------------------
+  // -- component logic --
   const mergeContact = compose(setContact, mergeDeepRight(contact));
   const handleOnBlur = v.validateOnBlur(contact);
   const handleOnChange = v.validateOnChange(
@@ -43,14 +43,16 @@ export const CreateContact: FC = () => {
   const handleSave = () => {
     if (v.validateAll(contact)) {
       setCanSubmit(true);
+      console.log(v.validationState);
     } else {
       setCanSubmit(false);
+      console.log(v.validationState);
     }
   };
 
-  // -- render logic -----------------------------------------------------------
+  // -- render logic --
   const render = display(contact);
-  const getError = readValidationError(v);
+  const getError = displayValidationError(v);
 
   return (
     <>

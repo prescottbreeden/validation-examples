@@ -19,10 +19,8 @@ export const DynamicPhone: React.FC<DynamicItemProps> = ({
   onChange,
   phones,
 }) => {
-  // -- component logic --------------------------------------------------------
 
-
-  // -- render logic -----------------------------------------------------------
+  // -- render logic --
   return (
     <>
       <FlexColumn>
