@@ -1,4 +1,4 @@
-import { randomString } from "utilities";
+import {randomString} from "utilities/general.utils";
 import { emptyPhone, Phone } from "./Phone.type";
 
 export type Contact = {

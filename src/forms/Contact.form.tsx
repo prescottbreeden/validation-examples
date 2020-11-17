@@ -3,7 +3,9 @@ import { DynamicForm } from "components/DynamicForm.component";
 import { Box, FlexColumn, FlexRow, Input, Label } from "layouts";
 import { prop } from "de-formed-validations";
 import { ContactValidation } from "validations/contact.validation";
-import { PhoneForm } from "forms/PhoneForm.form";
+import { PhoneForm } from "forms/Phone.form";
+import { CatForm } from "./Cat.form";
+import { DogForm } from "./Dog.form";
 import {Contact} from "types/Contact.type";
 import {compose, display, handleChangeEvent, upsert} from "utilities/general.utils";
 import {emptyPhone, Phone} from "types/Phone.type";
@@ -88,7 +90,21 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         removeForm={deletePhone}
         onChange={upsertPhones}
         items={prop("phones", data)}
-      ></DynamicForm>
+      />
+      <FlexRow>
+        <DogForm
+          canSubmit={canSubmit}
+          onChange={onChange}
+          data={prop("dog", data)}
+        />
+      </FlexRow>
+      <FlexRow>
+        <CatForm
+          canSubmit={canSubmit}
+          onChange={onChange}
+          data={prop("cat", data)}
+        />
+      </FlexRow>
     </>
   );
 };

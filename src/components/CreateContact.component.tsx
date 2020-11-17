@@ -1,10 +1,14 @@
 import React, { FC, useState } from "react";
 import { mergeDeepRight } from "ramda";
-import { Contact, emptyContact } from "types";
-import { compose, validationErrors } from "utilities";
 import { ContactValidation } from "validations/contact.validation";
 import { Button, FlexColumn, FlexRow } from "layouts";
-import { ContactForm } from "forms/ContactForm.form";
+import { ContactForm } from "forms/Contact.form";
+import {Contact, emptyContact} from "types/Contact.type";
+import {Cat, Dog, emptyCat, emptyDog} from "types/Pet.types";
+import {compose} from "de-formed-validations";
+import {validationErrors} from "utilities/validation.utils";
+
+type CustomForm = Contact & { cat: Cat; dog: Dog };
 
 export const CreateContact: FC = () => {
   // -- dependencies --
@@ -12,7 +16,11 @@ export const CreateContact: FC = () => {
 
   // -- local states --
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
-  const [contact, setContact] = useState<Contact>(emptyContact());
+  const [contact, setContact] = useState<CustomForm>({
+    ...emptyContact(),
+    cat: emptyCat(),
+    dog: emptyDog(),
+  });
 
   // -- component logic --
   const onChange = compose(setContact, mergeDeepRight(contact));

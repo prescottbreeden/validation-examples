@@ -1,6 +1,5 @@
 import React from "react";
 import { all } from "de-formed-validations";
-import { compose, randomString, safeMap } from "utilities";
 import {
   length,
   lt as gt,
@@ -10,8 +9,10 @@ import {
   equals,
   map,
   split,
+  toLower,
 } from "ramda";
 import { ValidationObject } from "de-formed-validations/dist/validations/types";
+import {compose, randomString, safeMap} from "./general.utils";
 
 // isLength :: num -> xs -> boolean
 export const isLength = (num: number) => compose(equals(num), length);
@@ -25,6 +26,10 @@ export const containsNoNumbers = compose(
   map(compose(not, isNumber)),
   split("")
 );
+
+// matchString :: (string, string) -> boolean
+export const matchString = (str1: string, str2: string) =>
+  equals(toLower(str1), toLower(str2));
 
 // onlyContainsNumbers :: string -> boolean
 export const stringIsNumbers = compose(all, map(isNumber), split(""));

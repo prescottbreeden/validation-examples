@@ -1,8 +1,8 @@
 import { useValidation } from "de-formed-validations";
 import { replace } from "ramda";
-import { Phone } from "types";
-import { compose, stringIsNotEmpty } from "utilities";
-import { isLength, stringIsNumbers } from "utilities";
+import {Phone} from "types/Phone.type";
+import {compose} from "utilities/general.utils";
+import {isLength, stringIsNotEmpty, stringIsNumbers} from "utilities/validation.utils";
 
 // PhoneValidation :: () -> ValidationObject<Phone>
 export const PhoneValidation = () => {

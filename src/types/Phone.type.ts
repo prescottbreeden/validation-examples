@@ -1,4 +1,4 @@
-import { randomString } from "utilities";
+import {randomString} from "utilities/general.utils";
 
 export type Phone = {
   id: string;

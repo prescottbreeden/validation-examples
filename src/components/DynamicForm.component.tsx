@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, FlexColumn, FlexRow, Icon } from "layouts";
-import { safeMap } from "utilities";
 import { prop } from "de-formed-validations";
+import {safeMap} from "utilities/general.utils";
 
 interface DynamicFormProps {
   addForm: Function;

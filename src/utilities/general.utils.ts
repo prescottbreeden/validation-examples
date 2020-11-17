@@ -1,4 +1,4 @@
-import { Phone } from "types";
+import { Phone } from "types/Phone.type";
 import { curry, map } from "ramda";
 import { ChangeEvent } from "react";
 import { prop } from "de-formed-validations";

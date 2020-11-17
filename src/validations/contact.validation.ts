@@ -1,14 +1,8 @@
 import { all, useValidation } from "de-formed-validations";
-import { map } from "ramda";
+import { compose, map } from "ramda";
+import {Contact} from "types/Contact.type";
+import {containsNoNumbers, emailIsValid, stringIsLessThan, stringIsNotEmpty} from "utilities/validation.utils";
 import { PhoneValidation } from "./phone.validation";
-import { Contact } from "types";
-import {
-  compose,
-  containsNoNumbers,
-  emailIsValid,
-  stringIsLessThan,
-  stringIsNotEmpty,
-} from "utilities";
 
 // ContactValidation :: () -> ValidationObject<Contact>
 export const ContactValidation = () => {
