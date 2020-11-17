@@ -1,23 +1,23 @@
 import React from 'react';
-import {Phone} from 'types';
-import {PhoneForm} from './PhoneForm.component';
 import {Box, Button, FlexColumn, FlexRow, Icon} from 'layouts';
 import {safeMap} from 'utilities';
 import {prop} from 'de-formed-validations';
 
-interface DynamicItemProps {
-  addNewPhone: Function;
+interface DynamicFormProps {
+  addForm: Function;
   canSubmit: boolean;
-  deletePhone: Function;
+  form: any;
+  items: any[];
+  removeForm: Function;
   onChange: Function;
-  phones: Phone[];
 }
-export const DynamicPhone: React.FC<DynamicItemProps> = ({
-  addNewPhone,
+export const DynamicForm: React.FC<DynamicFormProps> = ({
+  addForm,
   canSubmit,
-  deletePhone,
+  form,
+  items,
   onChange,
-  phones,
+  removeForm,
 }) => {
 
   // -- render logic --
@@ -25,29 +25,29 @@ export const DynamicPhone: React.FC<DynamicItemProps> = ({
     <>
       <FlexColumn>
         {safeMap(
-          (phone: Phone) => (
-            <FlexRow key={prop('id', phone)}>
-              <PhoneForm
-                canSubmit={canSubmit}
-                onChange={onChange}
-                phone={phone}
-              />
+          (item: any) => (
+            <FlexRow key={prop('id', item)}>
+              {React.createElement(form, {
+                canSubmit,
+                data: item,
+                onChange,
+              })}
               <Box>
                 <Icon
                   className="button--delete"
                   name="crossCircle"
-                  onClick={() => deletePhone(phone)}
+                  onClick={() => removeForm(item)}
                   title="Remove"
                 />
               </Box>
             </FlexRow>
           ),
-          phones
+          items
         )}
       </FlexColumn>
       <FlexRow>
         <Button
-          onClick={() => addNewPhone()}
+          onClick={() => addForm()}
           className="button form__btn--add"
         >
           + Add New Phone

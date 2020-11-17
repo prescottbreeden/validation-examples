@@ -3,17 +3,17 @@ import { mergeDeepRight } from 'ramda';
 import { compose, display, handleChangeEvent, displayValidationError } from 'utilities';
 import { Phone } from 'types';
 import { PhoneValidation } from 'validations/phone.validation';
-import {Box, FlexColumn, Input, Label} from 'layouts';
+import { Box, FlexColumn, Input, Label } from 'layouts';
 
 interface PhoneFormProps {
   canSubmit: boolean;
   onChange: Function;
-  phone: Phone;
+  data: Phone;
 }
 export const PhoneForm: React.FC<PhoneFormProps> = ({
   canSubmit,
   onChange,
-  phone,
+  data,
 }) => {
   // -- dependencies --
   const v = PhoneValidation();
@@ -21,19 +21,19 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   // -- component logic --
   const onPhoneChange = compose(
     onChange,
-    mergeDeepRight(phone),
+    mergeDeepRight(data),
     handleChangeEvent
   );
-  const handleOnBlur = v.validateOnBlur(phone);
-  const handleOnChange = v.validateOnChange(onPhoneChange, phone);
+  const handleOnBlur = v.validateOnBlur(data);
+  const handleOnChange = v.validateOnChange(onPhoneChange, data);
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && v.validateAll(phone);
-  }, [canSubmit, phone]); //eslint-disable-line
+    !canSubmit && v.validateAll(data);
+  }, [canSubmit, data]); //eslint-disable-line
 
   // -- render logic --
-  const render = display(phone);
+  const render = display(data);
   const getError = displayValidationError(v);
 
   return (
