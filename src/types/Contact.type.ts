@@ -1,5 +1,5 @@
-import {randomString} from "utilities";
-import {emptyPhone, Phone} from "./Phone.type";
+import { randomString } from "utilities";
+import { emptyPhone, Phone } from "./Phone.type";
 
 export type Contact = {
   id: string;
@@ -12,10 +12,9 @@ export type Contact = {
 
 export const emptyContact = (): Contact => ({
   id: randomString(),
-  name: '',
+  name: "",
   isSubcribed: false,
-  subscriptionEmail: '',
-  emails: [''],
+  subscriptionEmail: "",
+  emails: [""],
   phones: [emptyPhone()],
 });
-

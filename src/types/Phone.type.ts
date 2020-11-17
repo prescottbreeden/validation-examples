@@ -1,4 +1,4 @@
-import {randomString} from "utilities";
+import { randomString } from "utilities";
 
 export type Phone = {
   id: string;
@@ -8,7 +8,6 @@ export type Phone = {
 
 export const emptyPhone = (): Phone => ({
   id: randomString(),
-  description: '',
-  number: ''
+  description: "",
+  number: "",
 });
-

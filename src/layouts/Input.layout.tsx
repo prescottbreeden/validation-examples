@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface InputProps {
   id: string;
@@ -8,7 +8,11 @@ interface InputProps {
   value: string | number;
 }
 export const Input: React.FC<InputProps> = ({
-  id, name, onBlur, onChange, value
+  id,
+  name,
+  onBlur,
+  onChange,
+  value,
 }) => {
   return (
     <input

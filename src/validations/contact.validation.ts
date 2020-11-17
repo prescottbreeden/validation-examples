@@ -1,14 +1,14 @@
-import { all, useValidation } from 'de-formed-validations';
-import { map } from 'ramda';
-import { PhoneValidation } from './phone.validation';
-import { Contact } from 'types';
+import { all, useValidation } from "de-formed-validations";
+import { map } from "ramda";
+import { PhoneValidation } from "./phone.validation";
+import { Contact } from "types";
 import {
   compose,
   containsNoNumbers,
   emailIsValid,
   stringIsLessThan,
   stringIsNotEmpty,
-} from 'utilities';
+} from "utilities";
 
 // ContactValidation :: () -> ValidationObject<Contact>
 export const ContactValidation = () => {
@@ -16,27 +16,27 @@ export const ContactValidation = () => {
   return useValidation<Contact>({
     name: [
       {
-        errorMessage: 'Name is required.',
+        errorMessage: "Name is required.",
         validation: stringIsNotEmpty,
       },
       {
-        errorMessage: 'Name cannot contain numbers.',
+        errorMessage: "Name cannot contain numbers.",
         validation: containsNoNumbers,
       },
       {
-        errorMessage: 'Name must be less than 40 characters.',
+        errorMessage: "Name must be less than 40 characters.",
         validation: stringIsLessThan(40),
       },
     ],
     subscriptionEmail: [
       {
-        errorMessage: 'Please provide an email for your subscription service.',
+        errorMessage: "Please provide an email for your subscription service.",
         validation: (email: string, contact: Contact) => {
           return contact.isSubcribed ? stringIsNotEmpty(email) : true;
         },
       },
       {
-        errorMessage: 'Email is invalid.',
+        errorMessage: "Email is invalid.",
         validation: (email: string, contact: Contact) => {
           return contact.isSubcribed ? emailIsValid(email) : true;
         },
@@ -44,13 +44,13 @@ export const ContactValidation = () => {
     ],
     emails: [
       {
-        errorMessage: 'Not all emails provided are valid.',
+        errorMessage: "Not all emails provided are valid.",
         validation: compose(all, map(emailIsValid)),
       },
     ],
     phones: [
       {
-        errorMessage: 'Not all phones provided are valid.',
+        errorMessage: "Not all phones provided are valid.",
         validation: compose(all, map(validatePhone)),
       },
     ],

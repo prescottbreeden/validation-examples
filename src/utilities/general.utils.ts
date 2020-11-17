@@ -1,7 +1,7 @@
-import { Phone } from 'types';
-import { curry, map } from 'ramda';
-import { ChangeEvent } from 'react';
-import {prop} from 'de-formed-validations';
+import { Phone } from "types";
+import { curry, map } from "ramda";
+import { ChangeEvent } from "react";
+import { prop } from "de-formed-validations";
 
 /**
  * Creates a random 7 character string.
@@ -33,16 +33,13 @@ export const handleChangeEvent = (event: ChangeEvent<any>) => {
 
 // renderData :: obj -> string -> a | string
 export function display<T>(obj: T) {
-  return function(property: keyof T) {
-    return compose(
-      renderData,
-      prop(property),
-    )(obj);
-  }
-};
+  return function (property: keyof T) {
+    return compose(renderData, prop(property))(obj);
+  };
+}
 
 // renderData :: a -> a | string
-export const renderData = (value: any) => value ? value : '';
+export const renderData = (value: any) => (value ? value : "");
 
 /**
  *  Evaluate any two values for deep equality
@@ -68,4 +65,4 @@ export const upsert = (list: Phone[]) => (b: Phone) => {
 export const safeMap = curry((fn: Function, list: any[] | undefined | null) => {
   if (!list) return list;
   return map(fn as any, list);
-})
+});

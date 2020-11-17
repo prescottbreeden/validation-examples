@@ -1,7 +1,7 @@
-import React from 'react';
-import {Box, Button, FlexColumn, FlexRow, Icon} from 'layouts';
-import {safeMap} from 'utilities';
-import {prop} from 'de-formed-validations';
+import React from "react";
+import { Box, Button, FlexColumn, FlexRow, Icon } from "layouts";
+import { safeMap } from "utilities";
+import { prop } from "de-formed-validations";
 
 interface DynamicFormProps {
   addForm: Function;
@@ -19,14 +19,12 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
   onChange,
   removeForm,
 }) => {
-
-  // -- render logic --
   return (
     <>
       <FlexColumn>
         {safeMap(
           (item: any) => (
-            <FlexRow key={prop('id', item)}>
+            <FlexRow key={prop("id", item)}>
               {React.createElement(form, {
                 canSubmit,
                 data: item,
@@ -46,14 +44,10 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
         )}
       </FlexColumn>
       <FlexRow>
-        <Button
-          onClick={() => addForm()}
-          className="button form__btn--add"
-        >
+        <Button onClick={() => addForm()} className="button form__btn--add">
           + Add New Phone
         </Button>
       </FlexRow>
     </>
   );
 };
-

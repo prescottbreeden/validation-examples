@@ -1,11 +1,17 @@
-import React, { useEffect } from 'react';
-import { DynamicForm } from 'components/DynamicForm.component';
-import { Box, FlexColumn, FlexRow, Input, Label } from 'layouts';
-import { prop } from 'de-formed-validations';
-import { Contact, emptyPhone, Phone } from 'types';
-import { compose, display, displayValidationError, handleChangeEvent, upsert } from 'utilities';
-import { ContactValidation } from 'validations/contact.validation';
-import { PhoneForm } from 'forms/PhoneForm.form';
+import React, { useEffect } from "react";
+import { DynamicForm } from "components/DynamicForm.component";
+import { Box, FlexColumn, FlexRow, Input, Label } from "layouts";
+import { prop } from "de-formed-validations";
+import { Contact, emptyPhone, Phone } from "types";
+import {
+  compose,
+  display,
+  displayValidationError,
+  handleChangeEvent,
+  upsert,
+} from "utilities";
+import { ContactValidation } from "validations/contact.validation";
+import { PhoneForm } from "forms/PhoneForm.form";
 
 interface ContactFormProps {
   canSubmit: boolean;
@@ -23,19 +29,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   // -- component logic --
   const handleOnBlur = v.validateOnBlur(data);
   const handleOnChange = v.validateOnChange(
-    compose(
-      onChange,
-      handleChangeEvent,
-    ),
-    data);
+    compose(onChange, handleChangeEvent),
+    data
+  );
   const upsertPhones = compose(
     onChange,
     (phones: Phone[]) => ({ phones }),
-    upsert(data.phones),
+    upsert(data.phones)
   );
   const addNewPhone = () => {
     const phones = [...data.phones, emptyPhone()];
-    onChange({phones});
+    onChange({ phones });
   };
   const deletePhone = (p1: Phone) => {
     const phones = data.phones.filter((p2: Phone) => {
@@ -63,11 +67,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="name"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render('name')}
+            value={render("name")}
           />
-          <Box>
-            {getError('name')}
-          </Box>
+          <Box>{getError("name")}</Box>
         </FlexColumn>
       </FlexRow>
       <FlexRow>
@@ -78,11 +80,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="subscriptionEmail"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render('subscriptionEmail')}
+            value={render("subscriptionEmail")}
           />
-          <Box>
-            {getError('subscriptionEmail')}
-          </Box>
+          <Box>{getError("subscriptionEmail")}</Box>
         </FlexColumn>
       </FlexRow>
       <DynamicForm
@@ -91,10 +91,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         form={PhoneForm}
         removeForm={deletePhone}
         onChange={upsertPhones}
-        items={prop('phones', data)}
-      >
-      </DynamicForm>
+        items={prop("phones", data)}
+      ></DynamicForm>
     </>
   );
 };
-

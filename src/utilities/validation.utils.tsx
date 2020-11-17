@@ -1,6 +1,6 @@
-import React from 'react';
-import { all } from 'de-formed-validations';
-import { compose, randomString, safeMap } from 'utilities';
+import React from "react";
+import { all } from "de-formed-validations";
+import { compose, randomString, safeMap } from "utilities";
 import {
   length,
   lt as gt,
@@ -10,8 +10,8 @@ import {
   equals,
   map,
   split,
-} from 'ramda';
-import {ValidationObject} from 'de-formed-validations/dist/validations/types';
+} from "ramda";
+import { ValidationObject } from "de-formed-validations/dist/validations/types";
 
 // isLength :: num -> xs -> boolean
 export const isLength = (num: number) => compose(equals(num), length);
@@ -23,11 +23,11 @@ export const isNumber = compose(not, isNaN, Number);
 export const containsNoNumbers = compose(
   all,
   map(compose(not, isNumber)),
-  split('')
+  split("")
 );
 
 // onlyContainsNumbers :: string -> boolean
-export const stringIsNumbers = compose(all, map(isNumber), split(''));
+export const stringIsNumbers = compose(all, map(isNumber), split(""));
 
 // lessThan :: num -> string -> boolean
 export const stringIsLessThan = (num: number) => compose(lt(num), length, trim);
@@ -51,15 +51,20 @@ export const stringIsRequired = (propertyName: string) => {
 };
 
 export function validationErrors<T>(v: ValidationObject<T>) {
-  return safeMap((error: string) => (
-    <p key={randomString()} style={{ color: 'red' }}>{error}</p>
-  ), v.validationErrors);
+  return safeMap(
+    (error: string) => (
+      <p key={randomString()} style={{ color: "red" }}>
+        {error}
+      </p>
+    ),
+    v.validationErrors
+  );
 }
 
-export function displayValidationError<T>( v: ValidationObject<T>) {
-  return function(prop: keyof T) {
+export function displayValidationError<T>(v: ValidationObject<T>) {
+  return function (prop: keyof T) {
     return v.getError(prop) ? (
       <p className="form__error">{v.getError(prop)}</p>
     ) : null;
-  }
+  };
 }

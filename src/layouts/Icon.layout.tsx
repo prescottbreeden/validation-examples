@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { IconTable } from 'constants/Icons.const';
+import React, { CSSProperties } from "react";
+import { IconTable } from "constants/Icons.const";
 
 type IconComponentProps = {
   className?: string;
@@ -11,9 +11,14 @@ type IconComponentProps = {
 };
 
 export const Icon: React.FC<IconComponentProps> = ({
-  className = "svg", name, onClick, title, style = {}, tooltip
+  className = "svg",
+  name,
+  onClick,
+  title,
+  style = {},
+  tooltip,
 }) => {
-  const icon = IconTable[name] ? IconTable[name] : IconTable['goat'];
+  const icon = IconTable[name] ? IconTable[name] : IconTable["goat"];
   const labelName = title ? title : name;
 
   return (
