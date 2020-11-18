@@ -1,16 +1,21 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 html {
-  font-size: 62.5%; }
+  font-size: 62.5%;
+}
 
 body {
   font-size: 1.6rem;
-  font-family: "Roboto", "-apple-system", "BlinkMacSystemFont", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  margin: 2rem 4rem; }
+  font-family: 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  margin: 2rem 4rem;
+}
 
 .button {
   margin-top: -1.4rem;
@@ -23,41 +28,49 @@ body {
   box-sizing: border-box;
   border: 0.1rem solid #007d89;
   border-radius: 0.4rem;
-  transition: .2s;
+  transition: 0.2s;
   min-width: 18rem;
   text-align: center;
-  text-transform: capitalize; }
-  .button:hover {
-    cursor: pointer;
-    background-color: #007d89;
-    border: .1rem solid transparent;
-    color: #fff; }
-  .button--delete {
-    height: 2.5rem;
-    width: 2.5rem;
-    position: absolute;
-    top: 4.35rem;
-    z-index: 6;
-    fill: #bb3131;
-    overflow: hidden; }
-    .button--delete:hover {
-      cursor: pointer; }
+  text-transform: capitalize;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #007d89;
+  border: 0.1rem solid transparent;
+  color: #fff;
+}
+.button--delete {
+  height: 2.5rem;
+  width: 2.5rem;
+  position: absolute;
+  top: 4.35rem;
+  z-index: 6;
+  fill: #bb3131;
+  overflow: hidden;
+}
+.button--delete:hover {
+  cursor: pointer;
+}
 
 .form__row {
   display: flex;
   width: 100%;
   align-content: center;
-  margin-bottom: 2.4rem; }
+  margin-bottom: 2.4rem;
+}
 
 .form__group {
   display: flex;
-  flex-direction: column; }
-  .form__group:not(:last-child) {
-    margin-right: 1rem; }
+  flex-direction: column;
+}
+.form__group:not(:last-child) {
+  margin-right: 1rem;
+}
 
 .form__label {
   font-weight: 500;
-  line-height: 1.5; }
+  line-height: 1.5;
+}
 
 .form__input {
   margin-top: 0.8rem;
@@ -71,17 +84,22 @@ body {
   letter-spacing: normal;
   padding: 1.2rem;
   transition: box-shadow 0.2s ease-in-out;
-  color: #202425; }
-  .form__input:not(disabled):focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.1rem #007d89; }
+  color: #202425;
+}
+.form__input:not(disabled):focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem #007d89;
+}
 
 .form__checkbox {
-  margin: 0 1rem; }
+  margin: 0 1rem;
+}
 
 .form__box {
-  position: relative; }
+  position: relative;
+}
 
 .form__error {
-  margin-top: .4rem;
-  color: #bb3131; }
+  margin-top: 0.4rem;
+  color: #bb3131;
+}

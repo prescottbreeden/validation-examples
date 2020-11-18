@@ -31,7 +31,7 @@
     "start": "yarn compile:sass & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll",
+    "coverage": "yarn jest --coverage --watchAll",
     "eject": "react-scripts eject",
     "compile:sass": "node-sass src/sass/main.scss src/index.css",
     "watch:sass": "node-sass src/sass/main.scss src/index.css -w",
@@ -49,9 +49,6 @@
     }
   },
   "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/"
