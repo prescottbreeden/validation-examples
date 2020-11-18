@@ -5,7 +5,7 @@ import { safeMap } from 'utilities/general.utils';
 
 interface DynamicFormProps {
   addForm: Function;
-  canSubmit: boolean;
+  submitFailed: boolean;
   form: any;
   items: any[];
   removeForm: Function;
@@ -13,7 +13,7 @@ interface DynamicFormProps {
 }
 export const DynamicForm: React.FC<DynamicFormProps> = ({
   addForm,
-  canSubmit,
+  submitFailed,
   form,
   items,
   onChange,
@@ -26,7 +26,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
           (item: any) => (
             <FlexRow key={prop('id', item)}>
               {React.createElement(form, {
-                canSubmit,
+                submitFailed,
                 data: item,
                 onChange,
               })}

@@ -7,12 +7,12 @@ import { compose, display, handleChangeEvent } from 'utilities/general.utils';
 import { formatPhone } from 'utilities/validation.utils';
 
 interface PhoneFormProps {
-  canSubmit: boolean;
+  submitFailed: boolean;
   onChange: Function;
   data: Phone;
 }
 export const PhoneForm: React.FC<PhoneFormProps> = ({
-  canSubmit,
+  submitFailed,
   onChange,
   data,
 }) => {
@@ -35,8 +35,8 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && validateAll(data);
-  }, [canSubmit, data]); //eslint-disable-line
+    submitFailed && validateAll(data);
+  }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);

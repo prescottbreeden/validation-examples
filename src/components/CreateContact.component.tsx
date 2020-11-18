@@ -8,10 +8,10 @@ import { compose } from 'de-formed-validations';
 
 export const CreateContact: FC = () => {
   // -- dependencies --
-  const v = ContactValidation();
+  const { validateAll } = ContactValidation();
 
   // -- local states --
-  const [canSubmit, setCanSubmit] = useState<boolean>(true);
+  const [submitFailed, setSubmitFailed] = useState<boolean>(false);
   const [contact, setContact] = useState<Contact>(emptyContact());
 
   // -- component logic --
@@ -21,11 +21,11 @@ export const CreateContact: FC = () => {
   );
 
   const handleSave = () => {
-    if (v.validateAll(contact)) {
-      setCanSubmit(true);
+    if (validateAll(contact)) {
+      setSubmitFailed(false);
       // do the save-y bits
     } else {
-      setCanSubmit(false);
+      setSubmitFailed(true);
       // do the oops-y bits
     }
   };
@@ -35,7 +35,7 @@ export const CreateContact: FC = () => {
       <FlexRow>
         <FlexColumn>
           <ContactForm
-            canSubmit={canSubmit}
+            submitFailed={submitFailed}
             data={contact}
             onChange={onChange}
           />

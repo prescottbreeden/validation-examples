@@ -17,12 +17,12 @@ import { emptyPhone, Phone } from 'types/Phone.type';
 import { mergeRight } from 'ramda';
 
 interface ContactFormProps {
-  canSubmit: boolean;
+  submitFailed: boolean;
   onChange: (event: any) => any;
   data: Contact;
 }
 export const ContactForm: React.FC<ContactFormProps> = ({
-  canSubmit,
+  submitFailed,
   onChange,
   data,
 }) => {
@@ -67,8 +67,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && validateAll(data);
-  }, [canSubmit, data]); //eslint-disable-line
+    submitFailed && validateAll(data);
+  }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);
@@ -119,7 +119,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       </FlexRow>
       <DynamicForm
         addForm={addNewPhone}
-        canSubmit={canSubmit}
+        submitFailed={submitFailed}
         form={PhoneForm}
         removeForm={deletePhone}
         onChange={upsertPhones}
@@ -127,14 +127,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       />
       <FlexRow>
         <DogForm
-          canSubmit={canSubmit}
+          submitFailed={submitFailed}
           onChange={onChange}
           data={prop('dog', data)}
         />
       </FlexRow>
       <FlexRow>
         <CatForm
-          canSubmit={canSubmit}
+          submitFailed={submitFailed}
           onChange={onChange}
           data={prop('cat', data)}
         />

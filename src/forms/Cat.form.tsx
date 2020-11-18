@@ -6,12 +6,12 @@ import { Cat } from 'types/Pet.types';
 import { compose, display, handleChangeEvent } from 'utilities/general.utils';
 
 interface CatFormProps {
-  canSubmit: boolean;
+  submitFailed: boolean;
   onChange: Function;
   data: Cat;
 }
 export const CatForm: React.FC<CatFormProps> = ({
-  canSubmit,
+  submitFailed,
   onChange,
   data,
 }) => {
@@ -35,8 +35,8 @@ export const CatForm: React.FC<CatFormProps> = ({
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && validateAll(data);
-  }, [canSubmit, data]); //eslint-disable-line
+    submitFailed && validateAll(data);
+  }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);

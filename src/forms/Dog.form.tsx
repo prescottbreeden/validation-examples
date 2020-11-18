@@ -6,12 +6,12 @@ import { Dog } from 'types/Pet.types';
 import { compose, display, handleChangeEvent } from 'utilities/general.utils';
 
 interface DogFormProps {
-  canSubmit: boolean;
+  submitFailed: boolean;
   onChange: Function;
   data: Dog;
 }
 export const DogForm: React.FC<DogFormProps> = ({
-  canSubmit,
+  submitFailed,
   onChange,
   data,
 }) => {
@@ -35,8 +35,8 @@ export const DogForm: React.FC<DogFormProps> = ({
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && validateAll(data);
-  }, [canSubmit, data]); //eslint-disable-line
+    submitFailed && validateAll(data);
+  }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);
