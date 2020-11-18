@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
-import { Box, FlexColumn, Input, Label } from 'layouts';
+import { FlexColumn, Input, Label } from 'layouts';
 import { PetValidation } from 'validations/pet.validation';
 import { Dog } from 'types/Pet.types';
 import { compose, display, handleChangeEvent } from 'utilities/general.utils';
-import { displayValidationError } from 'utilities/validation.utils';
 
 interface DogFormProps {
   canSubmit: boolean;
@@ -17,7 +16,12 @@ export const DogForm: React.FC<DogFormProps> = ({
   data,
 }) => {
   // -- dependencies --
-  const v = PetValidation();
+  const {
+    getError,
+    validateAll,
+    validateOnBlur,
+    validateOnChange,
+  } = PetValidation();
 
   // -- component logic --
   const onDogChange = compose(
@@ -26,17 +30,16 @@ export const DogForm: React.FC<DogFormProps> = ({
     mergeDeepRight(data),
     handleChangeEvent
   );
-  const handleOnBlur = v.validateOnBlur(data);
-  const handleOnChange = v.validateOnChange(onDogChange, data);
+  const handleOnBlur = validateOnBlur(data);
+  const handleOnChange = validateOnChange(onDogChange, data);
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && v.validateAll(data);
+    !canSubmit && validateAll(data);
   }, [canSubmit, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);
-  const getError = displayValidationError(v);
 
   return (
     <>
@@ -49,7 +52,7 @@ export const DogForm: React.FC<DogFormProps> = ({
           onChange={handleOnChange}
           value={render('name')}
         />
-        <Box>{getError('name')}</Box>
+        {getError('name') && <p className="form__error">{getError('name')}</p>}
       </FlexColumn>
       <FlexColumn>
         <Label htmlFor={`cat-breed_${render('id')}`}>Dog Breed</Label>
@@ -60,7 +63,9 @@ export const DogForm: React.FC<DogFormProps> = ({
           onChange={handleOnChange}
           value={render('breed')}
         />
-        <Box>{getError('breed')}</Box>
+        {getError('breed') && (
+          <p className="form__error">{getError('breed')}</p>
+        )}
       </FlexColumn>
       <FlexColumn>
         <Label htmlFor={`sleeping-habits_${render('id')}`}>
@@ -73,7 +78,9 @@ export const DogForm: React.FC<DogFormProps> = ({
           onChange={handleOnChange}
           value={render('favoriteChewToy')}
         />
-        <Box>{getError('favoriteChewToy' as any)}</Box>
+        {getError('favoriteChewToy') && (
+          <p className="form__error">{getError('favoriteChewToy')}</p>
+        )}
       </FlexColumn>
     </>
   );

@@ -1,13 +1,13 @@
-import { ContactValidation } from './contact.validation';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { emptyContact } from 'types/Contact.type';
+import { ContactValidation } from './contact.validation';
+import { Contact, emptyContact } from 'types/Contact.type';
 import { emptyPhone } from 'types/Phone.type';
 
 describe('contact validations', () => {
   describe('allValid', () => {
     it('validates a valid payload', () => {
       const { result } = renderHook(() => ContactValidation());
-      const contact = {
+      const contact: Contact = {
         ...emptyContact(),
         name: 'bob ross',
         phones: [

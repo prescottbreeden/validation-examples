@@ -1,4 +1,3 @@
-import React from 'react';
 import { all } from 'de-formed-validations';
 import {
   length,
@@ -12,8 +11,7 @@ import {
   toLower,
   test,
 } from 'ramda';
-import { ValidationObject } from 'de-formed-validations/dist/validations/types';
-import { compose, randomString, safeMap } from './general.utils';
+import { compose } from './general.utils';
 
 // isLength :: num -> xs -> boolean
 export const isLength = (num: number) =>
@@ -73,22 +71,3 @@ export const formatPhone = (phone: string) => {
   }
   return phone;
 };
-
-export function validationErrors<T>(v: ValidationObject<T>) {
-  return safeMap(
-    (error: string) => (
-      <p key={randomString()} style={{ color: 'red' }}>
-        {error}
-      </p>
-    ),
-    v.validationErrors
-  );
-}
-
-export function displayValidationError<T>(v: ValidationObject<T>) {
-  return function(prop: keyof T) {
-    return v.getError(prop) ? (
-      <p className="form__error">{v.getError(prop)}</p>
-    ) : null;
-  };
-}

@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
-import { Box, FlexColumn, Input, Label } from 'layouts';
+import { FlexColumn, Input, Label } from 'layouts';
 import { Phone } from 'types/Phone.type';
 import { compose, display, handleChangeEvent } from 'utilities/general.utils';
-import {
-  displayValidationError,
-  formatPhone,
-} from 'utilities/validation.utils';
+import { formatPhone } from 'utilities/validation.utils';
 
 interface PhoneFormProps {
   canSubmit: boolean;
@@ -20,7 +17,12 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   data,
 }) => {
   // -- dependencies --
-  const v = PhoneValidation();
+  const {
+    getError,
+    validateAll,
+    validateOnBlur,
+    validateOnChange,
+  } = PhoneValidation();
 
   // -- component logic --
   const onPhoneChange = compose(
@@ -28,17 +30,16 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
     mergeDeepRight(data),
     handleChangeEvent
   );
-  const handleOnBlur = v.validateOnBlur(data);
-  const handleOnChange = v.validateOnChange(onPhoneChange, data);
+  const handleOnBlur = validateOnBlur(data);
+  const handleOnChange = validateOnChange(onPhoneChange, data);
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && v.validateAll(data);
+    !canSubmit && validateAll(data);
   }, [canSubmit, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);
-  const getError = displayValidationError(v);
 
   return (
     <>
@@ -51,7 +52,9 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
           onChange={handleOnChange}
           value={formatPhone(render('number'))}
         />
-        <Box>{getError('number')}</Box>
+        {getError('number') && (
+          <p className="form__error">{getError('number')}</p>
+        )}
       </FlexColumn>
       <FlexColumn>
         <Label htmlFor={`description_${render('id')}`}>Description</Label>
@@ -62,7 +65,9 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
           onChange={handleOnChange}
           value={render('description')}
         />
-        <Box>{getError('description')}</Box>
+        {getError('description') && (
+          <p className="form__error">{getError('description')}</p>
+        )}
       </FlexColumn>
     </>
   );

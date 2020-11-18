@@ -22,6 +22,7 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
     "react-test-renderer": "^17.0.1",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
     "yup": "^0.29.3"
@@ -31,7 +32,7 @@
     "start": "yarn compile:sass & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "yarn jest --coverage --watchAll",
+    "coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "compile:sass": "node-sass src/sass/main.scss src/index.css",
     "watch:sass": "node-sass src/sass/main.scss src/index.css -w",
@@ -47,12 +48,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/"
-    ]
   },
   "eslintConfig": {
     "extends": [

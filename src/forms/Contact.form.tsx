@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { DynamicForm } from 'components/DynamicForm.component';
-import { Box, FlexColumn, FlexRow, Input, Label } from 'layouts';
+import { FlexColumn, FlexRow, Input, Label } from 'layouts';
 import { prop } from 'de-formed-validations';
 import { ContactValidation } from 'validations/contact.validation';
 import { PhoneForm } from 'forms/Phone.form';
@@ -14,7 +14,6 @@ import {
   upsert,
 } from 'utilities/general.utils';
 import { emptyPhone, Phone } from 'types/Phone.type';
-import { displayValidationError } from 'utilities/validation.utils';
 import { mergeRight } from 'ramda';
 
 interface ContactFormProps {
@@ -28,11 +27,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   data,
 }) => {
   // -- dependencies --
-  const v = ContactValidation();
+  const {
+    getError,
+    validateAll,
+    validateIfTrue,
+    validateOnBlur,
+    validateOnChange,
+  } = ContactValidation();
 
   // -- component logic --
-  const handleOnBlur = v.validateOnBlur(data);
-  const handleOnChange = v.validateOnChange(
+  const handleOnBlur = validateOnBlur(data);
+  const handleOnChange = validateOnChange(
     compose(
       onChange,
       handleChangeEvent
@@ -41,7 +46,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   );
   const handleCheckbox = () => {
     const state = mergeRight(data, { isSubcribed: !data.isSubcribed });
-    v.validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
+    validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
   };
   const upsertPhones = compose(
@@ -62,12 +67,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
   // -- lifecycle --
   useEffect(() => {
-    !canSubmit && v.validateAll(data);
+    !canSubmit && validateAll(data);
   }, [canSubmit, data]); //eslint-disable-line
 
   // -- render logic --
   const render = display(data);
-  const getError = displayValidationError(v);
 
   return (
     <>
@@ -81,7 +85,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleOnChange}
             value={render('name')}
           />
-          <Box>{getError('name')}</Box>
+          {getError('name') && (
+            <p className="form__error">{getError('name')}</p>
+          )}
         </FlexColumn>
       </FlexRow>
       <FlexRow>
@@ -106,7 +112,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleOnChange}
             value={render('subscriptionEmail')}
           />
-          <Box>{getError('subscriptionEmail')}</Box>
+          {getError('subscriptionEmail') && (
+            <p className="form__error">{getError('subscriptionEmail')}</p>
+          )}
         </FlexColumn>
       </FlexRow>
       <DynamicForm
