@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, FlexColumn, FlexRow, Icon } from 'layouts';
-import { prop } from 'de-formed-validations';
-import { safeMap } from 'utilities/general.utils';
+import { prop } from 'utilities/general.utils';
+import { map } from 'ramda';
 
 interface DynamicFormProps {
   addForm: Function;
@@ -22,7 +22,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
   return (
     <>
       <FlexColumn>
-        {safeMap(
+        {map(
           (item: any) => (
             <FlexRow key={prop('id', item)}>
               {React.createElement(form, {

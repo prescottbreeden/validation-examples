@@ -1,19 +1,21 @@
 import { Phone } from 'types/Phone.type';
-import { curry, map } from 'ramda';
 import { ChangeEvent } from 'react';
-import { prop } from 'de-formed-validations';
+import { curry, reduce } from 'ramda';
 
-/**
- * Creates a random 7 character string.
- * @return string
- */
+// *randomString* :: () -> string
 export const randomString = () =>
   Math.random()
     .toString(36)
     .substring(7);
 
+// *trace* :: string -> a -> a
+export const trace = curry((txt: string, x: any) => {
+  console.log(txt, x);
+  return x;
+});
+
 /**
- *  Compose function that is a little more friendly to use with typescript.
+ *  Compose function that is less fussy.
  *  @param fns any number of comma-separated functions
  *  @return new function
  */
@@ -33,7 +35,10 @@ export const handleChangeEvent = (event: ChangeEvent<any>) => {
   return { [name]: value };
 };
 
-// renderData :: obj -> string -> a | string
+// prop :: a -> obj -> obj[a] | undefined
+export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
+
+// renderData :: obj -> string -> obj[string] | string
 export function display<T>(obj: T) {
   return function(property: keyof T) {
     return compose(
@@ -46,28 +51,15 @@ export function display<T>(obj: T) {
 // renderData :: a -> a | string
 export const renderData = (value: any) => (value ? value : '');
 
-/**
- *  Evaluate any two values for deep equality
- *  @param a any value
- *  @param b any value
- *  @return boolean
- */
-export const deepEqual = (a: unknown, b: unknown) => {
-  return JSON.stringify(a) === JSON.stringify(b);
-};
-
-// debug
-export const trace = curry((txt: string, x: any) => {
-  console.log(txt, x);
-  return x;
-});
-
 // upsert :: [a] -> b -> [a, b]
 export const upsert = (list: Phone[]) => (b: Phone) => {
   return list.map((a: Phone) => (a.id === b.id ? b : a));
 };
 
-export const safeMap = curry((fn: Function, list: any[] | undefined | null) => {
-  if (!list) return list;
-  return map(fn as any, list);
-});
+// reduceTruthy :: bool bool -> bool
+export const reduceTruthy = (acc: boolean, current: boolean) => {
+  return current ? acc : false;
+};
+
+// all :: [bool] -> bool
+export const all = reduce(reduceTruthy, true);

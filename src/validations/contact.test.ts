@@ -29,17 +29,6 @@ const validContactMock: Contact = {
 };
 
 describe('contact validations', () => {
-  describe('allValid', () => {
-    it('validates a valid payload', () => {
-      const { result } = renderHook(() => ContactValidation());
-      act(() => {
-        result.current.validateAll(validContactMock);
-      });
-      expect(result.current.validationErrors).toEqual([]);
-      expect(result.current.isValid).toBe(true);
-    });
-  });
-
   describe('name', () => {
     it('fails if no name is provided', () => {
       const { result } = renderHook(() => ContactValidation());
@@ -48,9 +37,31 @@ describe('contact validations', () => {
         expect(output).toBe(false);
       });
     });
+    it('passes if name is provided', () => {
+      const { result } = renderHook(() => ContactValidation());
+      act(() => {
+        const output = result.current.validate('name', 'bob ross');
+        expect(output).toBe(true);
+      });
+    });
   });
 
   describe('subscriptionEmail', () => {
+    it('passes if isSubcribed is false', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...emptyContact(),
+        isSubcribed: false,
+      };
+      act(() => {
+        const output = result.current.validate(
+          'subscriptionEmail',
+          '',
+          contact
+        );
+        expect(output).toBe(true);
+      });
+    });
     it('fails if isSubcribed and no subscriptionEmail is provided', () => {
       const { result } = renderHook(() => ContactValidation());
       const contact: Contact = {
@@ -137,6 +148,54 @@ describe('contact validations', () => {
       };
       act(() => {
         const output = result.current.validate('phones', contact.phones);
+        expect(output).toBe(true);
+      });
+    });
+  });
+
+  describe('dog', () => {
+    it('fails if dog is invalid', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...validContactMock,
+        dog: emptyDog(),
+      };
+      act(() => {
+        const output = result.current.validate('dog', contact.dog, contact);
+        expect(output).toBe(false);
+      });
+    });
+    it('passes if dog is valid', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...validContactMock,
+      };
+      act(() => {
+        const output = result.current.validate('dog', contact.dog, contact);
+        expect(output).toBe(true);
+      });
+    });
+  });
+
+  describe('cat', () => {
+    it('fails if cat is invalid', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...validContactMock,
+        cat: emptyCat(),
+      };
+      act(() => {
+        const output = result.current.validate('cat', contact.cat, contact);
+        expect(output).toBe(false);
+      });
+    });
+    it('passes if cat is valid', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...validContactMock,
+      };
+      act(() => {
+        const output = result.current.validate('cat', contact.cat, contact);
         expect(output).toBe(true);
       });
     });

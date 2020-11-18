@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { DynamicForm } from 'components/DynamicForm.component';
 import { FlexColumn, FlexRow, Input, Label } from 'layouts';
-import { prop } from 'de-formed-validations';
 import { ContactValidation } from 'validations/contact.validation';
 import { PhoneForm } from 'forms/Phone.form';
 import { CatForm } from './Cat.form';
 import { DogForm } from './Dog.form';
 import { Contact } from 'types/Contact.type';
+import { emptyPhone, Phone } from 'types/Phone.type';
 import {
   compose,
   display,
   handleChangeEvent,
+  prop,
   upsert,
 } from 'utilities/general.utils';
-import { emptyPhone, Phone } from 'types/Phone.type';
 import { mergeRight } from 'ramda';
 
 interface ContactFormProps {

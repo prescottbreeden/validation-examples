@@ -1,4 +1,4 @@
-import { all } from 'de-formed-validations';
+import { all, compose } from './general.utils';
 import {
   length,
   lt as gt,
@@ -11,7 +11,6 @@ import {
   toLower,
   test,
 } from 'ramda';
-import { compose } from './general.utils';
 
 // isLength :: num -> xs -> boolean
 export const isLength = (num: number) =>

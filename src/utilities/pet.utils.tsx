@@ -1,4 +1,4 @@
-import { compose, prop } from 'de-formed-validations';
+import { compose, prop } from 'utilities/general.utils';
 import { equals } from 'ramda';
 import { PET_TYPE_ENUM } from 'types/Pet.types';
 
