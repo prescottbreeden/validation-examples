@@ -1,7 +1,7 @@
 import { useValidation } from "de-formed-validations";
 import { replace } from "ramda";
 import {Phone} from "types/Phone.type";
-import {compose} from "utilities/general.utils";
+import {compose } from "utilities/general.utils";
 import {isLength, stringIsNotEmpty, stringIsNumbers} from "utilities/validation.utils";
 
 // PhoneValidation :: () -> ValidationObject<Phone>
@@ -14,11 +14,11 @@ export const PhoneValidation = () => {
       },
       {
         errorMessage: "Can only have digits.",
-        validation: compose(stringIsNumbers, replace(/-/g, "")),
+        validation: compose(stringIsNumbers, replace(/[-.() ]/g, "")),
       },
       {
         errorMessage: "Must be 10 digits.",
-        validation: compose(isLength(10), replace(/-/g, "")),
+        validation: compose(isLength(10), replace(/[-.() ]/g, "")),
       },
     ],
     description: [

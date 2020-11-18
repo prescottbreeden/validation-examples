@@ -10,6 +10,7 @@ import {Contact} from "types/Contact.type";
 import {compose, display, handleChangeEvent, upsert} from "utilities/general.utils";
 import {emptyPhone, Phone} from "types/Phone.type";
 import {displayValidationError} from "utilities/validation.utils";
+import {mergeRight} from "ramda";
 
 interface ContactFormProps {
   canSubmit: boolean;
@@ -30,6 +31,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     compose(onChange, handleChangeEvent),
     data
   );
+  const handleCheckbox = () => {
+    const state = mergeRight(data, { isSubcribed: !data.isSubcribed });
+    v.validateIfTrue('subscriptionEmail', state.subscriptionEmail, state)
+    onChange(state);
+  }
   const upsertPhones = compose(
     onChange,
     (phones: Phone[]) => ({ phones }),
@@ -69,6 +75,18 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           />
           <Box>{getError("name")}</Box>
         </FlexColumn>
+      </FlexRow>
+      <FlexRow>
+        <Label htmlFor="isSubcribed">Subscribe to Newsletter</Label>
+        <input
+          className="form__checkbox"
+          id="isSubcribed"
+          name="isSubcribed"
+          onBlur={handleOnBlur}
+          onChange={handleCheckbox}
+          type="checkbox"
+          value={prop('isSubcribed', data)}
+        />
       </FlexRow>
       <FlexRow>
         <FlexColumn>

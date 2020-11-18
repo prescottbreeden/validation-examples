@@ -4,7 +4,7 @@ import { PhoneValidation } from "validations/phone.validation";
 import { Box, FlexColumn, Input, Label } from "layouts";
 import {Phone} from "types/Phone.type";
 import {compose, display, handleChangeEvent} from "utilities/general.utils";
-import {displayValidationError} from "utilities/validation.utils";
+import {displayValidationError, formatPhone} from "utilities/validation.utils";
 
 interface PhoneFormProps {
   canSubmit: boolean;
@@ -46,7 +46,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
           name="number"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("number")}
+          value={formatPhone(render("number"))}
         />
         <Box>{getError("number")}</Box>
       </FlexColumn>

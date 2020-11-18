@@ -26,7 +26,6 @@ export const compose = (...fns: Function[]) => (x: any) =>
  *  @return void
  */
 export const handleChangeEvent = (event: ChangeEvent<any>) => {
-  if (!event) return;
   const { name, value } = event.target;
   return { [name]: value };
 };

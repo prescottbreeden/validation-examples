@@ -24,15 +24,15 @@ export const ContactValidation = () => {
     ],
     subscriptionEmail: [
       {
-        errorMessage: "Please provide an email for your subscription service.",
-        validation: (email: string, contact: Contact) => {
-          return contact.isSubcribed ? stringIsNotEmpty(email) : true;
+        errorMessage: "Please provide an email.",
+        validation: (val: string, contact: Contact) => {
+          return contact.isSubcribed ? stringIsNotEmpty(val) : true;
         },
       },
       {
         errorMessage: "Email is invalid.",
-        validation: (email: string, contact: Contact) => {
-          return contact.isSubcribed ? emailIsValid(email) : true;
+        validation: (val: string, contact: Contact) => {
+          return contact.isSubcribed ? emailIsValid(val) : true;
         },
       },
     ],

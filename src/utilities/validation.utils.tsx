@@ -10,6 +10,7 @@ import {
   map,
   split,
   toLower,
+  test,
 } from "ramda";
 import { ValidationObject } from "de-formed-validations/dist/validations/types";
 import {compose, randomString, safeMap} from "./general.utils";
@@ -21,11 +22,7 @@ export const isLength = (num: number) => compose(equals(num), length);
 export const isNumber = compose(not, isNaN, Number);
 
 // containsNoNumbers :: string -> boolean
-export const containsNoNumbers = compose(
-  all,
-  map(compose(not, isNumber)),
-  split("")
-);
+export const containsNoNumbers = test(/^[^0-9()]+$/);
 
 // matchString :: (string, string) -> boolean
 export const matchString = (str1: string, str2: string) =>
@@ -47,12 +44,13 @@ export const emailIsValid = (email: string) => {
   return re.test(String(email).toLowerCase());
 };
 
-// stringIsRequired :: string -> ValidationProps
-export const stringIsRequired = (propertyName: string) => {
-  return {
-    errorMessage: `${propertyName} is required.`,
-    validation: stringIsNotEmpty,
-  };
+export const formatPhone = (phone: string) => {
+  const digits = phone.replace(/\D/g, '');
+  const match = digits.match(/^(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    return `(${match[1]}) ${match[2]} - ${match[3]}`;
+  }
+  return phone;
 };
 
 export function validationErrors<T>(v: ValidationObject<T>) {

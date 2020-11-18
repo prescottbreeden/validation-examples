@@ -57,10 +57,10 @@ body {
 
 .form__label {
   font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 0.8rem; }
+  line-height: 1.5; }
 
 .form__input {
+  margin-top: 0.8rem;
   font-size: 2rem;
   height: 5.4rem;
   width: 100%;
@@ -75,6 +75,9 @@ body {
   .form__input:not(disabled):focus {
     outline: 0;
     box-shadow: 0 0 0 0.1rem #007d89; }
+
+.form__checkbox {
+  margin: 0 1rem; }
 
 .form__box {
   position: relative; }

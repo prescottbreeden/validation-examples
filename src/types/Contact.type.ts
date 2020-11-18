@@ -1,4 +1,5 @@
 import {randomString} from "utilities/general.utils";
+import {Cat, Dog, emptyCat, emptyDog} from "./Pet.types";
 import { emptyPhone, Phone } from "./Phone.type";
 
 export type Contact = {
@@ -8,6 +9,8 @@ export type Contact = {
   subscriptionEmail: string;
   emails: string[];
   phones: Phone[];
+  dog: Dog;
+  cat: Cat;
 };
 
 export const emptyContact = (): Contact => ({
@@ -17,4 +20,6 @@ export const emptyContact = (): Contact => ({
   subscriptionEmail: "",
   emails: [""],
   phones: [emptyPhone()],
+  dog: emptyDog(),
+  cat: emptyCat(),
 });

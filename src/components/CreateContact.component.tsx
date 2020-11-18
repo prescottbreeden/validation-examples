@@ -4,11 +4,7 @@ import { ContactValidation } from "validations/contact.validation";
 import { Button, FlexColumn, FlexRow } from "layouts";
 import { ContactForm } from "forms/Contact.form";
 import {Contact, emptyContact} from "types/Contact.type";
-import {Cat, Dog, emptyCat, emptyDog} from "types/Pet.types";
 import {compose} from "de-formed-validations";
-import {validationErrors} from "utilities/validation.utils";
-
-type CustomForm = Contact & { cat: Cat; dog: Dog };
 
 export const CreateContact: FC = () => {
   // -- dependencies --
@@ -16,11 +12,7 @@ export const CreateContact: FC = () => {
 
   // -- local states --
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
-  const [contact, setContact] = useState<CustomForm>({
-    ...emptyContact(),
-    cat: emptyCat(),
-    dog: emptyDog(),
-  });
+  const [contact, setContact] = useState<Contact>(emptyContact());
 
   // -- component logic --
   const onChange = compose(setContact, mergeDeepRight(contact));
@@ -37,12 +29,13 @@ export const CreateContact: FC = () => {
 
   return (
     <>
-      <ContactForm canSubmit={canSubmit} data={contact} onChange={onChange} />
       <FlexRow>
-        <Button onClick={handleSave}>Submit</Button>
+        <FlexColumn>
+          <ContactForm canSubmit={canSubmit} data={contact} onChange={onChange} />
+        </FlexColumn>
       </FlexRow>
       <FlexRow>
-        <FlexColumn>{validationErrors(v)}</FlexColumn>
+        <Button onClick={handleSave}>Submit</Button>
       </FlexRow>
     </>
   );

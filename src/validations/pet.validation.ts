@@ -1,7 +1,7 @@
 import { useValidation } from "de-formed-validations";
 import {Pet} from "types/Pet.types";
 import {isCat, isDog} from "utilities/pet.utils";
-import {stringIsNotEmpty} from "utilities/validation.utils";
+import {matchString, stringIsNotEmpty} from "utilities/validation.utils";
 
 // PetValidation :: () -> ValidationObject<Pet>
 export const PetValidation = () => {
@@ -16,6 +16,15 @@ export const PetValidation = () => {
       {
         errorMessage: "Breed is required.",
         validation: stringIsNotEmpty,
+      },
+      {
+        errorMessage: "Garfield is a Persian/Tabby",
+        validation: (val: string, pet: Pet) => {
+          if (isCat(pet)) {
+            return matchString(pet.name, "Garfield") ? matchString(val, "Persian/Tabby") : true;
+          }
+          return true;
+        }
       },
     ],
     favoriteChewToy: [
