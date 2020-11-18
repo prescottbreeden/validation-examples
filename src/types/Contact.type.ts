@@ -7,7 +7,6 @@ export type Contact = {
   name: string;
   isSubcribed: boolean;
   subscriptionEmail: string;
-  emails: string[];
   phones: Phone[];
   dog: Dog;
   cat: Cat;
@@ -18,7 +17,6 @@ export const emptyContact = (): Contact => ({
   name: '',
   isSubcribed: false,
   subscriptionEmail: '',
-  emails: [''],
   phones: [emptyPhone()],
   dog: emptyDog(),
   cat: emptyCat(),
