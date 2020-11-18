@@ -25,4 +25,49 @@ describe('contact validations', () => {
       expect(result.current.isValid).toBe(true);
     });
   });
+
+  describe('name', () => {
+    it('fails if no name is provided', () => {
+      const { result } = renderHook(() => ContactValidation());
+      act(() => {
+        const output = result.current.validate('name', '');
+        expect(output).toBe(false);
+      });
+    });
+  });
+
+  describe('subscriptionEmail', () => {
+    it('fails if isSubcribed and no subscriptionEmail is provided', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...emptyContact(),
+        isSubcribed: true,
+        subscriptionEmail: '',
+      };
+      act(() => {
+        const output = result.current.validate(
+          'subscriptionEmail',
+          '',
+          contact
+        );
+        expect(output).toBe(false);
+      });
+    });
+    it('passes if isSubcribed and subscriptionEmail is provided', () => {
+      const { result } = renderHook(() => ContactValidation());
+      const contact: Contact = {
+        ...emptyContact(),
+        isSubcribed: true,
+        subscriptionEmail: 'bob@ross.com',
+      };
+      act(() => {
+        const output = result.current.validate(
+          'subscriptionEmail',
+          'bob@ross.com',
+          contact
+        );
+        expect(output).toBe(true);
+      });
+    });
+  });
 });

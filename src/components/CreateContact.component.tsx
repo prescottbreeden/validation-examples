@@ -8,7 +8,7 @@ import { compose } from 'de-formed-validations';
 
 export const CreateContact: FC = () => {
   // -- dependencies --
-  const { validateAll } = ContactValidation();
+  const { isValid, validateAll } = ContactValidation();
 
   // -- local states --
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
@@ -44,6 +44,7 @@ export const CreateContact: FC = () => {
       <FlexRow>
         <Button onClick={handleSave}>Submit</Button>
       </FlexRow>
+      <p>{isValid ? 'Passing' : 'Failing'}</p>
     </>
   );
 };
