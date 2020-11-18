@@ -1,17 +1,20 @@
 import { all, useValidation } from 'de-formed-validations';
 import { compose, map } from 'ramda';
 import { Contact } from 'types/Contact.type';
+import { Pet } from 'types/Pet.types';
 import {
   containsNoNumbers,
   emailIsValid,
   stringIsLessThan,
   stringIsNotEmpty,
 } from 'utilities/validation.utils';
+import { PetValidation } from './pet.validation';
 import { PhoneValidation } from './phone.validation';
 
 // ContactValidation :: () -> ValidationObject<Contact>
 export const ContactValidation = () => {
   const { validateAll: validatePhone } = PhoneValidation();
+  const { validateAll: validatePet } = PetValidation();
   return useValidation<Contact>({
     name: [
       {
@@ -57,6 +60,18 @@ export const ContactValidation = () => {
           all,
           map(validatePhone)
         ),
+      },
+    ],
+    dog: [
+      {
+        errorMessage: 'Must be a valid dog.',
+        validation: (val: Pet) => validatePet(val),
+      },
+    ],
+    cat: [
+      {
+        errorMessage: 'Must be a valid cat.',
+        validation: (val: Pet) => validatePet(val),
       },
     ],
   });
