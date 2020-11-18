@@ -1,4 +1,4 @@
-import {randomString} from "utilities/general.utils";
+import { randomString } from 'utilities/general.utils';
 
 export enum PET_TYPE_ENUM {
   UNKNOWN = 0,
@@ -17,8 +17,8 @@ export interface Pet {
 export const emptyPet = (): Pet => {
   return {
     id: randomString(),
-    name: "",
-    breed: "",
+    name: '',
+    breed: '',
     petTypeId: 0,
   };
 };
@@ -30,7 +30,7 @@ export interface Cat extends Pet {
 export const emptyCat = (): Cat => {
   return {
     ...emptyPet(),
-    sleepingHabits: "",
+    sleepingHabits: '',
     petTypeId: 1,
   };
 };
@@ -42,7 +42,7 @@ export interface Dog extends Pet {
 export const emptyDog = (): Dog => {
   return {
     ...emptyPet(),
-    favoriteChewToy: "",
+    favoriteChewToy: '',
     petTypeId: 2,
   };
 };

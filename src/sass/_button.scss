@@ -7,9 +7,9 @@
   font-weight: normal;
   line-height: 1.5;
   box-sizing: border-box;
-  border: .1rem solid $color-blue;
+  border: 0.1rem solid $color-blue;
   border-radius: $default-border-radius;
-  transition: .2s;
+  transition: 0.2s;
   min-width: 18rem;
   text-align: center;
   text-transform: capitalize;
@@ -17,7 +17,7 @@
   &:hover {
     cursor: pointer;
     background-color: $color-blue;
-    border: .1rem solid transparent;
+    border: 0.1rem solid transparent;
     color: #fff;
   }
 
@@ -26,7 +26,6 @@
     width: 2.5rem;
     position: absolute;
     top: 4.35rem;
-    // left: 1.4rem;
     z-index: 6;
     fill: $color-red;
     overflow: hidden;

@@ -1,5 +1,5 @@
-import React from "react";
-import { all } from "de-formed-validations";
+import React from 'react';
+import { all } from 'de-formed-validations';
 import {
   length,
   lt as gt,
@@ -11,15 +11,23 @@ import {
   split,
   toLower,
   test,
-} from "ramda";
-import { ValidationObject } from "de-formed-validations/dist/validations/types";
-import {compose, randomString, safeMap} from "./general.utils";
+} from 'ramda';
+import { ValidationObject } from 'de-formed-validations/dist/validations/types';
+import { compose, randomString, safeMap } from './general.utils';
 
 // isLength :: num -> xs -> boolean
-export const isLength = (num: number) => compose(equals(num), length);
+export const isLength = (num: number) =>
+  compose(
+    equals(num),
+    length
+  );
 
 // isNumber :: string -> boolean
-export const isNumber = compose(not, isNaN, Number);
+export const isNumber = compose(
+  not,
+  isNaN,
+  Number
+);
 
 // containsNoNumbers :: string -> boolean
 export const containsNoNumbers = test(/^[^0-9()]+$/);
@@ -29,13 +37,26 @@ export const matchString = (str1: string, str2: string) =>
   equals(toLower(str1), toLower(str2));
 
 // onlyContainsNumbers :: string -> boolean
-export const stringIsNumbers = compose(all, map(isNumber), split(""));
+export const stringIsNumbers = compose(
+  all,
+  map(isNumber),
+  split('')
+);
 
 // lessThan :: num -> string -> boolean
-export const stringIsLessThan = (num: number) => compose(lt(num), length, trim);
+export const stringIsLessThan = (num: number) =>
+  compose(
+    lt(num),
+    length,
+    trim
+  );
 
 // isStringValid :: string -> boolean
-export const stringIsNotEmpty = compose(gt(0), length, trim);
+export const stringIsNotEmpty = compose(
+  gt(0),
+  length,
+  trim
+);
 
 // validateEmail :: Email -> boolean
 export const emailIsValid = (email: string) => {
@@ -56,7 +77,7 @@ export const formatPhone = (phone: string) => {
 export function validationErrors<T>(v: ValidationObject<T>) {
   return safeMap(
     (error: string) => (
-      <p key={randomString()} style={{ color: "red" }}>
+      <p key={randomString()} style={{ color: 'red' }}>
         {error}
       </p>
     ),
@@ -65,7 +86,7 @@ export function validationErrors<T>(v: ValidationObject<T>) {
 }
 
 export function displayValidationError<T>(v: ValidationObject<T>) {
-  return function (prop: keyof T) {
+  return function(prop: keyof T) {
     return v.getError(prop) ? (
       <p className="form__error">{v.getError(prop)}</p>
     ) : null;

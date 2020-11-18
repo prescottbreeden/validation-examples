@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { mergeDeepRight } from "ramda";
-import { PhoneValidation } from "validations/phone.validation";
-import { Box, FlexColumn, Input, Label } from "layouts";
-import {Phone} from "types/Phone.type";
-import {compose, display, handleChangeEvent} from "utilities/general.utils";
-import {displayValidationError} from "utilities/validation.utils";
+import React, { useEffect } from 'react';
+import { mergeDeepRight } from 'ramda';
+import { PhoneValidation } from 'validations/phone.validation';
+import { Box, FlexColumn, Input, Label } from 'layouts';
+import { Phone } from 'types/Phone.type';
+import { compose, display, handleChangeEvent } from 'utilities/general.utils';
+import { displayValidationError } from 'utilities/validation.utils';
 
 interface PhoneFormProps {
   canSubmit: boolean;
@@ -40,26 +40,26 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${render("id")}`}>Phone Number</Label>
+        <Label htmlFor={`number_${render('id')}`}>Phone Number</Label>
         <Input
-          id={`number_${render("id")}`}
+          id={`number_${render('id')}`}
           name="number"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("number")}
+          value={render('number')}
         />
-        <Box>{getError("number")}</Box>
+        <Box>{getError('number')}</Box>
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`description_${render("id")}`}>Description</Label>
+        <Label htmlFor={`description_${render('id')}`}>Description</Label>
         <Input
-          id={`description_${render("id")}`}
+          id={`description_${render('id')}`}
           name="description"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("description")}
+          value={render('description')}
         />
-        <Box>{getError("description")}</Box>
+        <Box>{getError('description')}</Box>
       </FlexColumn>
     </>
   );

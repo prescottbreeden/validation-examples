@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { mergeDeepRight } from "ramda";
-import { Box, FlexColumn, Input, Label } from "layouts";
-import { PetValidation } from "validations/pet.validation";
-import {Dog} from "types/Pet.types";
-import {compose, display, handleChangeEvent} from "utilities/general.utils";
-import {displayValidationError} from "utilities/validation.utils";
+import React, { useEffect } from 'react';
+import { mergeDeepRight } from 'ramda';
+import { Box, FlexColumn, Input, Label } from 'layouts';
+import { PetValidation } from 'validations/pet.validation';
+import { Dog } from 'types/Pet.types';
+import { compose, display, handleChangeEvent } from 'utilities/general.utils';
+import { displayValidationError } from 'utilities/validation.utils';
 
 interface DogFormProps {
   canSubmit: boolean;
@@ -41,39 +41,39 @@ export const DogForm: React.FC<DogFormProps> = ({
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${render("id")}`}>Dog Name</Label>
+        <Label htmlFor={`number_${render('id')}`}>Dog Name</Label>
         <Input
-          id={`number_${render("id")}`}
+          id={`number_${render('id')}`}
           name="name"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("name")}
+          value={render('name')}
         />
-        <Box>{getError("name")}</Box>
+        <Box>{getError('name')}</Box>
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`cat-breed_${render("id")}`}>Dog Breed</Label>
+        <Label htmlFor={`cat-breed_${render('id')}`}>Dog Breed</Label>
         <Input
-          id={`cat-breed_${render("id")}`}
+          id={`cat-breed_${render('id')}`}
           name="breed"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("breed")}
+          value={render('breed')}
         />
-        <Box>{getError("breed")}</Box>
+        <Box>{getError('breed')}</Box>
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`sleeping-habits_${render("id")}`}>
+        <Label htmlFor={`sleeping-habits_${render('id')}`}>
           Favorite Chew Toy
         </Label>
         <Input
-          id={`sleeping-habits_${render("id")}`}
+          id={`sleeping-habits_${render('id')}`}
           name="favoriteChewToy"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render("favoriteChewToy")}
+          value={render('favoriteChewToy')}
         />
-        <Box>{getError("favoriteChewToy" as any)}</Box>
+        <Box>{getError('favoriteChewToy' as any)}</Box>
       </FlexColumn>
     </>
   );

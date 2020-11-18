@@ -1,13 +1,16 @@
-import { Phone } from "types/Phone.type";
-import { curry, map } from "ramda";
-import { ChangeEvent } from "react";
-import { prop } from "de-formed-validations";
+import { Phone } from 'types/Phone.type';
+import { curry, map } from 'ramda';
+import { ChangeEvent } from 'react';
+import { prop } from 'de-formed-validations';
 
 /**
  * Creates a random 7 character string.
  * @return string
  */
-export const randomString = () => Math.random().toString(36).substring(7);
+export const randomString = () =>
+  Math.random()
+    .toString(36)
+    .substring(7);
 
 /**
  *  Compose function that is a little more friendly to use with typescript.
@@ -32,13 +35,16 @@ export const handleChangeEvent = (event: ChangeEvent<any>) => {
 
 // renderData :: obj -> string -> a | string
 export function display<T>(obj: T) {
-  return function (property: keyof T) {
-    return compose(renderData, prop(property))(obj);
+  return function(property: keyof T) {
+    return compose(
+      renderData,
+      prop(property)
+    )(obj);
   };
 }
 
 // renderData :: a -> a | string
-export const renderData = (value: any) => (value ? value : "");
+export const renderData = (value: any) => (value ? value : '');
 
 /**
  *  Evaluate any two values for deep equality

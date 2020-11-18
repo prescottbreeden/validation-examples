@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
-import { DynamicForm } from "components/DynamicForm.component";
-import { Box, FlexColumn, FlexRow, Input, Label } from "layouts";
-import { prop } from "de-formed-validations";
-import { ContactValidation } from "validations/contact.validation";
-import { PhoneForm } from "forms/Phone.form";
-import { CatForm } from "./Cat.form";
-import { DogForm } from "./Dog.form";
-import {Contact} from "types/Contact.type";
-import {compose, display, handleChangeEvent, upsert} from "utilities/general.utils";
-import {emptyPhone, Phone} from "types/Phone.type";
-import {displayValidationError} from "utilities/validation.utils";
-import {mergeRight} from "ramda";
+import React, { useEffect } from 'react';
+import { DynamicForm } from 'components/DynamicForm.component';
+import { Box, FlexColumn, FlexRow, Input, Label } from 'layouts';
+import { prop } from 'de-formed-validations';
+import { ContactValidation } from 'validations/contact.validation';
+import { PhoneForm } from 'forms/Phone.form';
+import { CatForm } from './Cat.form';
+import { DogForm } from './Dog.form';
+import { Contact } from 'types/Contact.type';
+import {
+  compose,
+  display,
+  handleChangeEvent,
+  upsert,
+} from 'utilities/general.utils';
+import { emptyPhone, Phone } from 'types/Phone.type';
+import { displayValidationError } from 'utilities/validation.utils';
+import { mergeRight } from 'ramda';
 
 interface ContactFormProps {
   canSubmit: boolean;
@@ -28,14 +33,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   // -- component logic --
   const handleOnBlur = v.validateOnBlur(data);
   const handleOnChange = v.validateOnChange(
-    compose(onChange, handleChangeEvent),
+    compose(
+      onChange,
+      handleChangeEvent
+    ),
     data
   );
   const handleCheckbox = () => {
     const state = mergeRight(data, { isSubcribed: !data.isSubcribed });
-    v.validateIfTrue('subscriptionEmail', state.subscriptionEmail, state)
+    v.validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
-  }
+  };
   const upsertPhones = compose(
     onChange,
     (phones: Phone[]) => ({ phones }),
@@ -71,9 +79,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="name"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render("name")}
+            value={render('name')}
           />
-          <Box>{getError("name")}</Box>
+          <Box>{getError('name')}</Box>
         </FlexColumn>
       </FlexRow>
       <FlexRow>
@@ -96,9 +104,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="subscriptionEmail"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render("subscriptionEmail")}
+            value={render('subscriptionEmail')}
           />
-          <Box>{getError("subscriptionEmail")}</Box>
+          <Box>{getError('subscriptionEmail')}</Box>
         </FlexColumn>
       </FlexRow>
       <DynamicForm
@@ -107,20 +115,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         form={PhoneForm}
         removeForm={deletePhone}
         onChange={upsertPhones}
-        items={prop("phones", data)}
+        items={prop('phones', data)}
       />
       <FlexRow>
         <DogForm
           canSubmit={canSubmit}
           onChange={onChange}
-          data={prop("dog", data)}
+          data={prop('dog', data)}
         />
       </FlexRow>
       <FlexRow>
         <CatForm
           canSubmit={canSubmit}
           onChange={onChange}
-          data={prop("cat", data)}
+          data={prop('cat', data)}
         />
       </FlexRow>
     </>

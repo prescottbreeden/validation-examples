@@ -1,10 +1,10 @@
-import React, { FC, useState } from "react";
-import { mergeDeepRight } from "ramda";
-import { ContactValidation } from "validations/contact.validation";
-import { Button, FlexColumn, FlexRow } from "layouts";
-import { ContactForm } from "forms/Contact.form";
-import {Contact, emptyContact} from "types/Contact.type";
-import {compose} from "de-formed-validations";
+import React, { FC, useState } from 'react';
+import { mergeDeepRight } from 'ramda';
+import { ContactValidation } from 'validations/contact.validation';
+import { Button, FlexColumn, FlexRow } from 'layouts';
+import { ContactForm } from 'forms/Contact.form';
+import { Contact, emptyContact } from 'types/Contact.type';
+import { compose } from 'de-formed-validations';
 
 export const CreateContact: FC = () => {
   // -- dependencies --
@@ -15,7 +15,10 @@ export const CreateContact: FC = () => {
   const [contact, setContact] = useState<Contact>(emptyContact());
 
   // -- component logic --
-  const onChange = compose(setContact, mergeDeepRight(contact));
+  const onChange = compose(
+    setContact,
+    mergeDeepRight(contact)
+  );
 
   const handleSave = () => {
     if (v.validateAll(contact)) {
@@ -31,7 +34,11 @@ export const CreateContact: FC = () => {
     <>
       <FlexRow>
         <FlexColumn>
-          <ContactForm canSubmit={canSubmit} data={contact} onChange={onChange} />
+          <ContactForm
+            canSubmit={canSubmit}
+            data={contact}
+            onChange={onChange}
+          />
         </FlexColumn>
       </FlexRow>
       <FlexRow>

@@ -1,7 +1,4 @@
-$color-tech-white: #f3f7f7;
-
 .form {
-
   &__row {
     display: flex;
     width: 100%;
@@ -38,7 +35,7 @@ $color-tech-white: #f3f7f7;
 
     &:not(disabled):focus {
       outline: 0;
-      box-shadow: 0 0 0 .1rem $color-blue;
+      box-shadow: 0 0 0 0.1rem $color-blue;
     }
   }
 
@@ -51,8 +48,7 @@ $color-tech-white: #f3f7f7;
   }
 
   &__error {
-    margin-top: .4rem;
+    margin-top: 0.4rem;
     color: $color-red;
   }
 }
-
