@@ -5,6 +5,7 @@ import {
   prop,
   replaceItem,
   trace,
+  formatPhone,
 } from './general.utils';
 
 describe('all', () => {
@@ -18,8 +19,8 @@ describe('all', () => {
   });
 });
 
-describe('upsertItem', () => {
-  it('returns a new list with the upserted item where ids match', () => {
+describe('replaceItem', () => {
+  it('returns a new list with the item replaced where ids match', () => {
     const array = [{ id: 1 }, { id: 2 }, { id: 3 }];
     expect(replaceItem(array, { id: 2, name: 'dingo' })).toStrictEqual([
       { id: 1 },
@@ -79,5 +80,17 @@ describe('handleChangeEvent', () => {
 describe('trace', () => {
   it('returns the payload', () => {
     expect(trace('dingo', 42)).toBe(42);
+  });
+});
+
+describe('formatPhone', () => {
+  it('returns a formatted 10-digit phone number', () => {
+    const phone = '1231231234';
+    const expected = '(123) 123 - 1234';
+    expect(formatPhone(phone)).toBe(expected);
+  });
+  it('returns the existing number if less than 10 digits', () => {
+    const phone = '123123123';
+    expect(formatPhone(phone)).toBe(phone);
   });
 });

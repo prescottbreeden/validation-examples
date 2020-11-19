@@ -3,8 +3,12 @@ import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
 import { FlexColumn, Input, Label } from 'layouts';
 import { Phone } from 'types/phone.type';
-import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
-import { formatPhone } from 'utilities/validation.utils';
+import {
+  compose,
+  safeGet,
+  handleChangeEvent,
+  formatPhone,
+} from 'utilities/general.utils';
 
 interface PhoneFormProps {
   submitFailed: boolean;

@@ -11,6 +11,8 @@ import {
   toLower,
   test,
 } from 'ramda';
+// regular expressions
+const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // isLength :: num -> xs -> boolean
 export const isLength = (num: number) =>
@@ -56,23 +58,4 @@ export const stringIsNotEmpty = compose(
 );
 
 // validateEmail :: string -> boolean
-export const emailIsValid = (email: string) => {
-  if (!email) return true;
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const testEmail = compose(
-    test(re),
-    toLower,
-    String
-  );
-  return testEmail(email);
-};
-
-// formatPhone :: string -> string;
-export const formatPhone = (phone: string) => {
-  const digits = phone.replace(/\D/g, '');
-  const match = digits.match(/^(\d{3})(\d{3})(\d{4})$/);
-  if (match) {
-    return `(${match[1]}) ${match[2]} - ${match[3]}`;
-  }
-  return phone;
-};
+export const emailIsValid = test(emailRegEx);

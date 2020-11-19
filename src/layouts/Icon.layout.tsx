@@ -1,5 +1,17 @@
 import React, { CSSProperties } from 'react';
-import { IconHashTable } from 'types/ui.type';
+
+interface IconDatum {
+  fill?: string;
+  fillRule?: string;
+  paths: string[];
+  stroke?: string;
+  strokeWidth?: string;
+  viewBox: string;
+}
+
+interface IconHashTable {
+  [key: string]: IconDatum;
+}
 
 type IconComponentProps = {
   className?: string;
