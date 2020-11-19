@@ -3,7 +3,7 @@ import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
 import { FlexColumn, Input, Label } from 'layouts';
 import { Phone } from 'types/Phone.type';
-import { compose, display, handleChangeEvent } from 'utilities/general.utils';
+import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 import { formatPhone } from 'utilities/validation.utils';
 
 interface PhoneFormProps {
@@ -39,31 +39,31 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
-  const render = display(data);
+  const get = safeGet(data);
 
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${render('id')}`}>Phone Number</Label>
+        <Label htmlFor={`number_${get('id')}`}>Phone Number</Label>
         <Input
-          id={`number_${render('id')}`}
+          id={`number_${get('id')}`}
           name="number"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={formatPhone(render('number'))}
+          value={formatPhone(get('number'))}
         />
         {getError('number') && (
           <p className="form__error">{getError('number')}</p>
         )}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`description_${render('id')}`}>Description</Label>
+        <Label htmlFor={`description_${get('id')}`}>Description</Label>
         <Input
-          id={`description_${render('id')}`}
+          id={`description_${get('id')}`}
           name="description"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('description')}
+          value={get('description')}
         />
         {getError('description') && (
           <p className="form__error">{getError('description')}</p>

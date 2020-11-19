@@ -3,7 +3,7 @@ import { mergeDeepRight } from 'ramda';
 import { FlexColumn, Input, Label } from 'layouts';
 import { PetValidation } from 'validations/pet.validation';
 import { Cat } from 'types/Pet.types';
-import { compose, display, handleChangeEvent } from 'utilities/general.utils';
+import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 
 interface CatFormProps {
   submitFailed: boolean;
@@ -39,44 +39,42 @@ export const CatForm: React.FC<CatFormProps> = ({
   }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
-  const render = display(data);
+  const get = safeGet(data);
 
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${render('id')}`}>Cat Name</Label>
+        <Label htmlFor={`number_${get('id')}`}>Cat Name</Label>
         <Input
-          id={`number_${render('id')}`}
+          id={`number_${get('id')}`}
           name="name"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('name')}
+          value={get('name')}
         />
         {getError('name') && <p className="form__error">{getError('name')}</p>}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`cat-breed_${render('id')}`}>Cat Breed</Label>
+        <Label htmlFor={`cat-breed_${get('id')}`}>Cat Breed</Label>
         <Input
-          id={`cat-breed_${render('id')}`}
+          id={`cat-breed_${get('id')}`}
           name="breed"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('breed')}
+          value={get('breed')}
         />
         {getError('breed') && (
           <p className="form__error">{getError('breed')}</p>
         )}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`sleeping-habits_${render('id')}`}>
-          Sleeping Habits
-        </Label>
+        <Label htmlFor={`sleeping-habits_${get('id')}`}>Sleeping Habits</Label>
         <Input
-          id={`sleeping-habits_${render('id')}`}
+          id={`sleeping-habits_${get('id')}`}
           name="sleepingHabits"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('sleepingHabits')}
+          value={get('sleepingHabits')}
         />
         {getError('sleepingHabits') && (
           <p className="form__error">{getError('sleepingHabits')}</p>

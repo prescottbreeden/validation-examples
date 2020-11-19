@@ -1,6 +1,6 @@
 import {
   all,
-  display,
+  safeGet,
   handleChangeEvent,
   prop,
   replaceItem,
@@ -37,16 +37,16 @@ describe('upsertItem', () => {
   });
 });
 
-describe('display', () => {
+describe('safeGet', () => {
   it('returns the property', () => {
     const obj = { name: 'dingo', isFalse: false };
-    const f = display(obj);
+    const f = safeGet(obj);
     expect(f('name')).toBe('dingo');
     expect(f('isFalse')).toBe(false);
   });
   it('returns an empty string if property', () => {
     const obj = { name: 'dingo' };
-    const f = display(obj);
+    const f = safeGet(obj);
     expect(f('bald' as any)).toBe('');
   });
 });

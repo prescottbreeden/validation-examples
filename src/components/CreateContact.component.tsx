@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { ContactValidation } from 'validations/contact.validation';
 import { Button, FlexColumn, FlexRow } from 'layouts';
@@ -19,10 +19,6 @@ export const CreateContact: FC = () => {
     setContact,
     mergeDeepRight(contact)
   );
-
-  useEffect(() => {
-    console.log(contact);
-  }, [contact]);
 
   const handleSave = () => {
     if (validateAll(contact)) {

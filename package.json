@@ -7,16 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "@types/yup": "^0.29.9",
     "de-formed-validations": "^2.0.5",
-    "husky": "1.3.1",
-    "node-sass": "^5.0.0",
-    "prettier": "1.16.4",
-    "pretty-quick": "1.10.0",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -24,8 +15,17 @@
     "react-test-renderer": "^17.0.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4",
-    "yup": "^0.29.3"
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "husky": "1.3.1",
+    "node-sass": "^5.0.0",
+    "prettier": "1.16.4",
+    "pretty-quick": "1.10.0"
   },
   "scripts": {
     "precommit": "lint-staged",

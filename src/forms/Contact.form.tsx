@@ -9,9 +9,8 @@ import { Contact } from 'types/Contact.type';
 import { emptyPhone, Phone } from 'types/Phone.type';
 import {
   compose,
-  display,
+  safeGet,
   handleChangeEvent,
-  prop,
   replaceItem,
 } from 'utilities/general.utils';
 import { mergeRight } from 'ramda';
@@ -71,7 +70,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
-  const render = display(data);
+  const get = safeGet(data);
 
   return (
     <>
@@ -83,7 +82,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="name"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render('name')}
+            value={get('name')}
           />
           {getError('name') && (
             <p className="form__error">{getError('name')}</p>
@@ -99,7 +98,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           onBlur={handleOnBlur}
           onChange={handleCheckbox}
           type="checkbox"
-          value={prop('isSubcribed', data)}
+          value={get('isSubcribed')}
         />
       </FlexRow>
       <FlexRow>
@@ -110,7 +109,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="subscriptionEmail"
             onBlur={handleOnBlur}
             onChange={handleOnChange}
-            value={render('subscriptionEmail')}
+            value={get('subscriptionEmail')}
           />
           {getError('subscriptionEmail') && (
             <p className="form__error">{getError('subscriptionEmail')}</p>
@@ -123,20 +122,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         form={PhoneForm}
         removeForm={deletePhone}
         onChange={updatePhones}
-        items={prop('phones', data)}
+        items={get('phones')}
       />
       <FlexRow>
         <DogForm
           submitFailed={submitFailed}
           onChange={onChange}
-          data={prop('dog', data)}
+          data={get('dog')}
         />
       </FlexRow>
       <FlexRow>
         <CatForm
           submitFailed={submitFailed}
           onChange={onChange}
-          data={prop('cat', data)}
+          data={get('cat')}
         />
       </FlexRow>
     </>

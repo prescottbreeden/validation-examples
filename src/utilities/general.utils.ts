@@ -38,7 +38,7 @@ export const handleChangeEvent = (event: ChangeEvent<any>) => {
 export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
 // renderData :: obj -> string -> obj[string] | string
-export function display<T>(obj: T) {
+export function safeGet<T>(obj: T) {
   return function(property: keyof T) {
     return compose(
       renderData,
@@ -56,11 +56,4 @@ export const replaceItem = curry((list: any[], b: any) => {
 });
 
 // all :: [bool] -> bool
-// export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);
-// reduceTruthy :: bool bool -> bool
-export const reduceTruthy = (acc: boolean, current: boolean) => {
-  return current ? acc : false;
-};
-
-// all :: [bool] -> bool
-export const all = reduce(reduceTruthy, true);
+export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);

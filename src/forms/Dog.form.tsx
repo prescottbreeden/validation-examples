@@ -3,7 +3,7 @@ import { mergeDeepRight } from 'ramda';
 import { FlexColumn, Input, Label } from 'layouts';
 import { PetValidation } from 'validations/pet.validation';
 import { Dog } from 'types/Pet.types';
-import { compose, display, handleChangeEvent } from 'utilities/general.utils';
+import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 
 interface DogFormProps {
   submitFailed: boolean;
@@ -39,44 +39,44 @@ export const DogForm: React.FC<DogFormProps> = ({
   }, [submitFailed, data]); //eslint-disable-line
 
   // -- render logic --
-  const render = display(data);
+  const get = safeGet(data);
 
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${render('id')}`}>Dog Name</Label>
+        <Label htmlFor={`number_${get('id')}`}>Dog Name</Label>
         <Input
-          id={`number_${render('id')}`}
+          id={`number_${get('id')}`}
           name="name"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('name')}
+          value={get('name')}
         />
         {getError('name') && <p className="form__error">{getError('name')}</p>}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`cat-breed_${render('id')}`}>Dog Breed</Label>
+        <Label htmlFor={`dog-breed_${get('id')}`}>Dog Breed</Label>
         <Input
-          id={`cat-breed_${render('id')}`}
+          id={`dog-breed_${get('id')}`}
           name="breed"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('breed')}
+          value={get('breed')}
         />
         {getError('breed') && (
           <p className="form__error">{getError('breed')}</p>
         )}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`sleeping-habits_${render('id')}`}>
+        <Label htmlFor={`favoriteChewToy_${get('id')}`}>
           Favorite Chew Toy
         </Label>
         <Input
-          id={`sleeping-habits_${render('id')}`}
+          id={`favoriteChewToy_${get('id')}`}
           name="favoriteChewToy"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
-          value={render('favoriteChewToy')}
+          value={get('favoriteChewToy')}
         />
         {getError('favoriteChewToy') && (
           <p className="form__error">{getError('favoriteChewToy')}</p>

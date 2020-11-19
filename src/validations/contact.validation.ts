@@ -1,8 +1,8 @@
 import { useValidation } from 'de-formed-validations';
-import { compose, map } from 'ramda';
+import { map } from 'ramda';
 import { Contact } from 'types/Contact.type';
 import { Pet } from 'types/Pet.types';
-import { all } from 'utilities/general.utils';
+import { all, compose } from 'utilities/general.utils';
 import {
   containsNoNumbers,
   emailIsValid,
@@ -43,15 +43,6 @@ export const ContactValidation = () => {
         validation: (val: string, contact: Contact) => {
           return contact.isSubcribed ? emailIsValid(val) : true;
         },
-      },
-    ],
-    emails: [
-      {
-        errorMessage: 'Not all emails provided are valid.',
-        validation: compose(
-          all,
-          map(emailIsValid)
-        ),
       },
     ],
     phones: [
