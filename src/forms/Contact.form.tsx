@@ -12,7 +12,7 @@ import {
   display,
   handleChangeEvent,
   prop,
-  upsert,
+  replaceItem,
 } from 'utilities/general.utils';
 import { mergeRight } from 'ramda';
 
@@ -49,10 +49,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
   };
-  const upsertPhones = compose(
+  const updatePhones = compose(
     onChange,
     (phones: Phone[]) => ({ phones }),
-    upsert(data.phones)
+    replaceItem(data.phones)
   );
   const addNewPhone = () => {
     const phones = [...data.phones, emptyPhone()];
@@ -122,7 +122,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         submitFailed={submitFailed}
         form={PhoneForm}
         removeForm={deletePhone}
-        onChange={upsertPhones}
+        onChange={updatePhones}
         items={prop('phones', data)}
       />
       <FlexRow>

@@ -1,6 +1,5 @@
-import { Phone } from 'types/Phone.type';
 import { ChangeEvent } from 'react';
-import { curry, reduce } from 'ramda';
+import { curry, isNil, reduce } from 'ramda';
 
 // *randomString* :: () -> string
 export const randomString = () =>
@@ -49,17 +48,12 @@ export function display<T>(obj: T) {
 }
 
 // renderData :: a -> a | string
-export const renderData = (value: any) => (value ? value : '');
+export const renderData = (value: any) => (isNil(value) ? '' : value);
 
 // upsert :: [a] -> b -> [a, b]
-export const upsert = (list: Phone[]) => (b: Phone) => {
-  return list.map((a: Phone) => (a.id === b.id ? b : a));
-};
-
-// reduceTruthy :: bool bool -> bool
-export const reduceTruthy = (acc: boolean, current: boolean) => {
-  return current ? acc : false;
-};
+export const replaceItem = curry((list: any[], b: any) => {
+  return list.map((a: any) => (a.id === b.id ? b : a));
+});
 
 // all :: [bool] -> bool
-export const all = reduce(reduceTruthy, true);
+export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);

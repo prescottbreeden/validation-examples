@@ -29,7 +29,7 @@ export const isNumber = compose(
 // containsNoNumbers :: string -> boolean
 export const containsNoNumbers = test(/^[^0-9()]+$/);
 
-// matchString :: (string, string) -> boolean
+// matchString :: string string -> boolean
 export const matchString = (str1: string, str2: string) =>
   equals(toLower(str1), toLower(str2));
 
@@ -55,13 +55,14 @@ export const stringIsNotEmpty = compose(
   trim
 );
 
-// validateEmail :: Email -> boolean
+// validateEmail :: string -> boolean
 export const emailIsValid = (email: string) => {
   if (!email) return true;
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
+// formatPhone :: string -> string;
 export const formatPhone = (phone: string) => {
   const digits = phone.replace(/\D/g, '');
   const match = digits.match(/^(\d{3})(\d{3})(\d{4})$/);
