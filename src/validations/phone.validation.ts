@@ -1,6 +1,6 @@
 import { useValidation } from 'de-formed-validations';
 import { replace } from 'ramda';
-import { Phone } from 'types/Phone.type';
+import { Phone } from 'types/phone.type';
 import { compose } from 'utilities/general.utils';
 import {
   isLength,

@@ -1,7 +1,7 @@
 import { useValidation } from 'de-formed-validations';
 import { map } from 'ramda';
-import { Contact } from 'types/Contact.type';
-import { Pet } from 'types/Pet.types';
+import { Contact } from 'types/contact.type';
+import { Pet } from 'types/pet.types';
 import { all, compose } from 'utilities/general.utils';
 import {
   containsNoNumbers,

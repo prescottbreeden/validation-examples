@@ -1,6 +1,6 @@
 import { compose, prop } from 'utilities/general.utils';
 import { equals } from 'ramda';
-import { PET_TYPE_ENUM } from 'types/Pet.types';
+import { PET_TYPE_ENUM } from 'types/pet.types';
 
 export const isCat = compose(
   equals(PET_TYPE_ENUM.CAT),

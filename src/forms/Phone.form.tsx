@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
 import { FlexColumn, Input, Label } from 'layouts';
-import { Phone } from 'types/Phone.type';
+import { Phone } from 'types/phone.type';
 import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 import { formatPhone } from 'utilities/validation.utils';
 

@@ -3,7 +3,7 @@ import { mergeDeepRight } from 'ramda';
 import { ContactValidation } from 'validations/contact.validation';
 import { Button, FlexColumn, FlexRow } from 'layouts';
 import { ContactForm } from 'forms/Contact.form';
-import { Contact, emptyContact } from 'types/Contact.type';
+import { Contact, emptyContact } from 'types/contact.type';
 import { compose } from 'utilities/general.utils';
 
 export const CreateContact: FC = () => {

@@ -1,6 +1,6 @@
 import { randomString } from 'utilities/general.utils';
-import { Cat, Dog, emptyCat, emptyDog } from './Pet.types';
-import { emptyPhone, Phone } from './Phone.type';
+import { Cat, Dog, emptyCat, emptyDog } from './pet.types';
+import { emptyPhone, Phone } from './phone.type';
 
 export type Contact = {
   id: string;

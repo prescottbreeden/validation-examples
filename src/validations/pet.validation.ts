@@ -1,5 +1,5 @@
 import { useValidation } from 'de-formed-validations';
-import { Pet } from 'types/Pet.types';
+import { Pet } from 'types/pet.types';
 import { isCat, isDog } from 'utilities/pet.utils';
 import { matchString, stringIsNotEmpty } from 'utilities/validation.utils';
 

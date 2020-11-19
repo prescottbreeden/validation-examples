@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import { emptyPhone, Phone } from 'types/Phone.type';
+import { emptyPhone, Phone } from 'types/phone.type';
 import { PhoneValidation } from './phone.validation';
 
 describe('phone validations', () => {

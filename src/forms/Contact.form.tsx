@@ -5,8 +5,8 @@ import { ContactValidation } from 'validations/contact.validation';
 import { PhoneForm } from 'forms/Phone.form';
 import { CatForm } from './Cat.form';
 import { DogForm } from './Dog.form';
-import { Contact } from 'types/Contact.type';
-import { emptyPhone, Phone } from 'types/Phone.type';
+import { Contact } from 'types/contact.type';
+import { emptyPhone, Phone } from 'types/phone.type';
 import {
   compose,
   safeGet,

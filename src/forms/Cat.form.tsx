@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { FlexColumn, Input, Label } from 'layouts';
 import { PetValidation } from 'validations/pet.validation';
-import { Cat } from 'types/Pet.types';
+import { Cat } from 'types/pet.types';
 import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 
 interface CatFormProps {
