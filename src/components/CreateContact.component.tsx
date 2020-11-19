@@ -7,11 +7,12 @@ import { Contact, emptyContact } from 'types/contact.type';
 import { compose } from 'utilities/general.utils';
 
 export const CreateContact: FC = () => {
-  // -- dependencies --
-  const { validateAll } = ContactValidation();
+  // -- validation functions --
+  const { resetValidationState, validateAll } = ContactValidation();
 
   // -- local states --
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
+  const [resetValidation, setResetValidation] = useState<boolean>(false);
   const [contact, setContact] = useState<Contact>(emptyContact());
 
   // -- component logic --
@@ -31,19 +32,32 @@ export const CreateContact: FC = () => {
     }
   };
 
+  const handleReset = () => {
+    setSubmitFailed(false);
+    setResetValidation(!resetValidation);
+    setContact(emptyContact());
+    resetValidationState();
+  };
+
   return (
     <>
       <FlexRow>
         <FlexColumn>
           <ContactForm
-            submitFailed={submitFailed}
             data={contact}
             onChange={onChange}
+            resetValidation={resetValidation}
+            submitFailed={submitFailed}
           />
         </FlexColumn>
       </FlexRow>
       <FlexRow>
-        <Button onClick={handleSave}>Submit</Button>
+        <FlexColumn>
+          <Button onClick={handleSave}>Submit</Button>
+        </FlexColumn>
+        <FlexColumn>
+          <Button onClick={handleReset}>Reset Form</Button>
+        </FlexColumn>
       </FlexRow>
     </>
   );

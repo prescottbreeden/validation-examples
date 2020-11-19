@@ -3,21 +3,23 @@ import { Box, Button, FlexColumn, FlexRow, Icon } from 'layouts';
 import { prop } from 'utilities/general.utils';
 import { map } from 'ramda';
 
-interface DynamicFormProps {
+type DynamicFormProps = {
   addForm: Function;
-  submitFailed: boolean;
   form: any;
   items: any[];
+  onChange: (event: any) => any;
   removeForm: Function;
-  onChange: Function;
-}
+  resetValidation: boolean;
+  submitFailed: boolean;
+};
 export const DynamicForm: React.FC<DynamicFormProps> = ({
   addForm,
-  submitFailed,
   form,
   items,
   onChange,
   removeForm,
+  resetValidation,
+  submitFailed,
 }) => {
   return (
     <>
@@ -26,9 +28,10 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
           (item: any) => (
             <FlexRow key={prop('id', item)}>
               {React.createElement(form, {
-                submitFailed,
                 data: item,
                 onChange,
+                resetValidation,
+                submitFailed,
               })}
               <Box>
                 <Icon

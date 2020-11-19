@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import { emptyPet, Pet, PET_TYPE_ENUM } from 'types/pet.types';
+import { emptyPet, Pet, PET_TYPE_ENUM } from 'types/pet.type';
 import { PetValidation } from './pet.validation';
 
 describe('pet validations', () => {

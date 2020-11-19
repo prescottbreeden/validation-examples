@@ -1,5 +1,5 @@
 import { randomString } from 'utilities/general.utils';
-import { Cat, Dog, emptyCat, emptyDog } from './pet.types';
+import { Cat, Dog, emptyCat, emptyDog } from './pet.type';
 import { emptyPhone, Phone } from './phone.type';
 
 export type Contact = {

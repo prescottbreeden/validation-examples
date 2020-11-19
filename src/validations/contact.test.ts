@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { ContactValidation } from './contact.validation';
 import { Contact, emptyContact } from 'types/contact.type';
 import { emptyPhone } from 'types/phone.type';
-import { emptyCat, emptyDog } from 'types/pet.types';
+import { emptyCat, emptyDog } from 'types/pet.type';
 
 const validContactMock: Contact = {
   ...emptyContact(),

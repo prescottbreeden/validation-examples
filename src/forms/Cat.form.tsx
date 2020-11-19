@@ -2,22 +2,20 @@ import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { FlexColumn, Input, Label } from 'layouts';
 import { PetValidation } from 'validations/pet.validation';
-import { Cat } from 'types/pet.types';
+import { FormType } from 'types/form.type';
+import { Cat } from 'types/pet.type';
 import { compose, safeGet, handleChangeEvent } from 'utilities/general.utils';
 
-interface CatFormProps {
-  submitFailed: boolean;
-  onChange: Function;
-  data: Cat;
-}
-export const CatForm: React.FC<CatFormProps> = ({
-  submitFailed,
-  onChange,
+export const CatForm: React.FC<FormType<Cat>> = ({
   data,
+  onChange,
+  resetValidation,
+  submitFailed,
 }) => {
-  // -- dependencies --
+  // -- validation functions --
   const {
     getError,
+    resetValidationState,
     validateAll,
     validateOnBlur,
     validateOnChange,
@@ -37,6 +35,10 @@ export const CatForm: React.FC<CatFormProps> = ({
   useEffect(() => {
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
+
+  useEffect(() => {
+    resetValidationState();
+  }, [resetValidation]); //eslint-disable-line
 
   // -- render logic --
   const get = safeGet(data);

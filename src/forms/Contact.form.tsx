@@ -5,29 +5,27 @@ import { ContactValidation } from 'validations/contact.validation';
 import { PhoneForm } from 'forms/Phone.form';
 import { CatForm } from './Cat.form';
 import { DogForm } from './Dog.form';
+import { FormType } from 'types/form.type';
 import { Contact } from 'types/contact.type';
 import { emptyPhone, Phone } from 'types/phone.type';
+import { mergeRight } from 'ramda';
 import {
   compose,
   safeGet,
   handleChangeEvent,
   replaceItem,
 } from 'utilities/general.utils';
-import { mergeRight } from 'ramda';
 
-interface ContactFormProps {
-  submitFailed: boolean;
-  onChange: (event: any) => any;
-  data: Contact;
-}
-export const ContactForm: React.FC<ContactFormProps> = ({
-  submitFailed,
-  onChange,
+export const ContactForm: React.FC<FormType<Contact>> = ({
   data,
+  onChange,
+  resetValidation,
+  submitFailed,
 }) => {
-  // -- dependencies --
+  // -- validation functions --
   const {
     getError,
+    resetValidationState,
     validateAll,
     validateIfTrue,
     validateOnBlur,
@@ -68,6 +66,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   useEffect(() => {
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
+
+  useEffect(() => {
+    resetValidationState();
+  }, [resetValidation]); //eslint-disable-line
 
   // -- render logic --
   const get = safeGet(data);
@@ -118,24 +120,27 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       </FlexRow>
       <DynamicForm
         addForm={addNewPhone}
-        submitFailed={submitFailed}
         form={PhoneForm}
-        removeForm={deletePhone}
-        onChange={updatePhones}
         items={get('phones')}
+        onChange={updatePhones}
+        removeForm={deletePhone}
+        resetValidation={resetValidation}
+        submitFailed={submitFailed}
       />
       <FlexRow>
         <DogForm
-          submitFailed={submitFailed}
-          onChange={onChange}
           data={get('dog')}
+          onChange={onChange}
+          resetValidation={resetValidation}
+          submitFailed={submitFailed}
         />
       </FlexRow>
       <FlexRow>
         <CatForm
-          submitFailed={submitFailed}
-          onChange={onChange}
           data={get('cat')}
+          onChange={onChange}
+          resetValidation={resetValidation}
+          submitFailed={submitFailed}
         />
       </FlexRow>
     </>

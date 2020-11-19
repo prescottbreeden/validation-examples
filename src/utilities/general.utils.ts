@@ -27,6 +27,9 @@ export const handleChangeEvent = (event: ChangeEvent<any>) => {
 // prop :: a -> obj -> obj[a] | undefined
 export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
+// renderData :: a -> a | string
+export const renderData = (value: any) => (isNil(value) ? '' : value);
+
 // renderData :: obj -> string -> obj[string] | string
 export function safeGet<T>(obj: T) {
   return function(property: keyof T) {
@@ -36,9 +39,6 @@ export function safeGet<T>(obj: T) {
     )(obj);
   };
 }
-
-// renderData :: a -> a | string
-export const renderData = (value: any) => (isNil(value) ? '' : value);
 
 // replaceItem :: [a] -> a -> [a]
 export const replaceItem = curry((list: any[], b: any) => {

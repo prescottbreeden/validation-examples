@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
 import { FlexColumn, Input, Label } from 'layouts';
+import { FormType } from 'types/form.type';
 import { Phone } from 'types/phone.type';
 import {
   compose,
@@ -10,19 +11,16 @@ import {
   formatPhone,
 } from 'utilities/general.utils';
 
-interface PhoneFormProps {
-  submitFailed: boolean;
-  onChange: Function;
-  data: Phone;
-}
-export const PhoneForm: React.FC<PhoneFormProps> = ({
-  submitFailed,
-  onChange,
+export const PhoneForm: React.FC<FormType<Phone>> = ({
   data,
+  onChange,
+  resetValidation,
+  submitFailed,
 }) => {
-  // -- dependencies --
+  // -- validation functions --
   const {
     getError,
+    resetValidationState,
     validateAll,
     validateOnBlur,
     validateOnChange,
@@ -41,6 +39,10 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   useEffect(() => {
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
+
+  useEffect(() => {
+    resetValidationState();
+  }, [resetValidation]); //eslint-disable-line
 
   // -- render logic --
   const get = safeGet(data);
