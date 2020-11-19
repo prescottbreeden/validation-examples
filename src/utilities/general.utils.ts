@@ -56,4 +56,11 @@ export const replaceItem = curry((list: any[], b: any) => {
 });
 
 // all :: [bool] -> bool
-export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);
+// export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);
+// reduceTruthy :: bool bool -> bool
+export const reduceTruthy = (acc: boolean, current: boolean) => {
+  return current ? acc : false;
+};
+
+// all :: [bool] -> bool
+export const all = reduce(reduceTruthy, true);
