@@ -8,14 +8,14 @@ import { DogForm } from './Dog.form';
 import { FormType } from 'types/form.type';
 import { Contact } from 'types/contact.type';
 import { emptyPhone, Phone } from 'types/phone.type';
-import { mergeRight } from 'ramda';
+import { mergeDeepRight } from 'ramda';
 import {
   compose,
   safeGet,
   handleChangeEvent,
   replaceItem,
+  wrapObjectLiteral,
 } from 'utilities/general.utils';
-import { Cat, Dog } from 'types/pet.type';
 
 export const ContactForm: React.FC<FormType<Contact>> = ({
   data,
@@ -43,13 +43,13 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     data
   );
   const handleIsSubscribed = () => {
-    const state = mergeRight(data, { isSubcribed: !data.isSubcribed });
+    const state = mergeDeepRight(data, { isSubcribed: !data.isSubcribed });
     validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
   };
   const updatePhones = compose(
     onChange,
-    (phones: Phone[]) => ({ phones }),
+    wrapObjectLiteral('phones'),
     replaceItem(data.phones)
   );
   const addNewPhone = () => {
@@ -62,15 +62,6 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     });
     return onChange({ phones });
   };
-
-  const handleDog = compose(
-    onChange,
-    (dog: Dog) => ({ dog })
-  );
-  const handleCat = compose(
-    onChange,
-    (cat: Cat) => ({ cat })
-  );
 
   // -- lifecycle --
   useEffect(() => {
@@ -140,7 +131,10 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
       <FlexRow>
         <DogForm
           data={get('dog')}
-          onChange={handleDog}
+          onChange={compose(
+            onChange,
+            wrapObjectLiteral('dog')
+          )}
           resetValidation={resetValidation}
           submitFailed={submitFailed}
         />
@@ -148,7 +142,10 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
       <FlexRow>
         <CatForm
           data={get('cat')}
-          onChange={handleCat}
+          onChange={compose(
+            onChange,
+            wrapObjectLiteral('cat')
+          )}
           resetValidation={resetValidation}
           submitFailed={submitFailed}
         />

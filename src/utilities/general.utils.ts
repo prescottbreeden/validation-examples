@@ -1,5 +1,4 @@
-import { ChangeEvent } from 'react';
-import { curry, isNil, reduce } from 'ramda';
+import { converge, curry, isNil, reduce } from 'ramda';
 
 // *randomString* :: () -> string
 export const randomString = () =>
@@ -18,17 +17,23 @@ export const trace = curry((txt: string, x: any) => {
 export const compose = (...fns: Function[]) => (x: any) =>
   fns.reduceRight((y: any, f: any) => f(y), x);
 
-// handleChangeEvent :: event -> obj
-export const handleChangeEvent = (event: ChangeEvent<any>) => {
-  const { name, value } = event.target;
-  return { [name]: value };
-};
-
 // prop :: a -> obj -> obj[a] | undefined
 export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
 // renderData :: a -> a | string
 export const renderData = (value: any) => (isNil(value) ? '' : value);
+
+// handleChangeEvent :: string a -> { [string]: a }
+export const wrapObjectLiteral = curry((name: string, data: any) => {
+  return {
+    [name]: data,
+  };
+});
+// handleChangeEvent :: event -> obj
+export const handleChangeEvent = compose(
+  converge(wrapObjectLiteral, [prop('name'), prop('value')]),
+  prop('target')
+);
 
 // renderData :: obj -> string -> obj[string] | string
 export function safeGet<T>(obj: T) {
