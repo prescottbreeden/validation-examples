@@ -47,7 +47,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
   };
-  const updatePhones = compose(
+  const handlePhoneChange = compose(
     onChange,
     set('phones'),
     replaceItem(data.phones)
@@ -123,7 +123,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
         addForm={addNewPhone}
         form={PhoneForm}
         items={get('phones')}
-        onChange={updatePhones}
+        onChange={handlePhoneChange}
         removeForm={deletePhone}
         resetValidation={resetValidation}
         submitFailed={submitFailed}
