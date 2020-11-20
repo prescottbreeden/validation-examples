@@ -11,10 +11,10 @@ import { emptyPhone, Phone } from 'types/phone.type';
 import { mergeDeepRight } from 'ramda';
 import {
   compose,
-  safeGet,
   handleChangeEvent,
   replaceItem,
-  wrapObjectLiteral,
+  safeGet,
+  set,
 } from 'utilities/general.utils';
 
 export const ContactForm: React.FC<FormType<Contact>> = ({
@@ -49,7 +49,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
   };
   const updatePhones = compose(
     onChange,
-    wrapObjectLiteral('phones'),
+    set('phones'),
     replaceItem(data.phones)
   );
   const addNewPhone = () => {
@@ -133,7 +133,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
           data={get('dog')}
           onChange={compose(
             onChange,
-            wrapObjectLiteral('dog')
+            set('dog')
           )}
           resetValidation={resetValidation}
           submitFailed={submitFailed}
@@ -144,7 +144,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
           data={get('cat')}
           onChange={compose(
             onChange,
-            wrapObjectLiteral('cat')
+            set('cat')
           )}
           resetValidation={resetValidation}
           submitFailed={submitFailed}

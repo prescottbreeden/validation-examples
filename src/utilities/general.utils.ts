@@ -23,15 +23,12 @@ export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 // renderData :: a -> a | string
 export const renderData = (value: any) => (isNil(value) ? '' : value);
 
-// handleChangeEvent :: string a -> { [string]: a }
-export const wrapObjectLiteral = curry((name: string, data: any) => {
-  return {
-    [name]: data,
-  };
-});
+// set :: string a -> { [string]: a }
+export const set = curry((name: string, value: any) => ({ [name]: value }));
+
 // handleChangeEvent :: event -> obj
 export const handleChangeEvent = compose(
-  converge(wrapObjectLiteral, [prop('name'), prop('value')]),
+  converge(set, [prop('name'), prop('value')]),
   prop('target')
 );
 
