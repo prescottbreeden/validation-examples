@@ -20,7 +20,7 @@ export const compose = (...fns: Function[]) => (x: any) =>
 // prop :: a -> obj -> obj[a] | undefined
 export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
-// renderData :: a -> a | string
+// defaultString :: a -> a | string
 export const defaultString = (value: any) => (isNil(value) ? '' : value);
 
 // set :: string a -> { [string]: a }
@@ -32,7 +32,7 @@ export const handleChangeEvent = compose(
   prop('target')
 );
 
-// renderData :: obj -> string -> obj[string] | string
+// safeGet :: obj -> string -> obj[string] | string
 export function safeGet<T>(obj: T) {
   return function(property: keyof T) {
     return compose(
