@@ -1,11 +1,11 @@
 import {
   all,
-  safeGet,
+  formatPhone,
   handleChangeEvent,
   prop,
   replaceItem,
+  safeGet,
   trace,
-  formatPhone,
 } from './general.utils';
 
 describe('all', () => {
@@ -16,6 +16,43 @@ describe('all', () => {
   it('returns false if any element in array is false', () => {
     const array = [true, false, true];
     expect(all(array)).toBe(false);
+  });
+});
+
+describe('formatPhone', () => {
+  it('returns a formatted 10-digit phone number', () => {
+    const phone = '1231231234';
+    const expected = '(123) 123 - 1234';
+    expect(formatPhone(phone)).toBe(expected);
+  });
+  it('returns the existing number if less than 10 digits', () => {
+    const phone = '123123123';
+    expect(formatPhone(phone)).toBe(phone);
+  });
+});
+
+describe('handleChangeEvent', () => {
+  it('returns an object { [name]: value } from event', () => {
+    const fakeEvent = {
+      target: {
+        name: 'nickname',
+        value: 'bobbytables',
+      },
+    };
+    const expected = { nickname: 'bobbytables' };
+    expect(handleChangeEvent(fakeEvent as any)).toStrictEqual(expected);
+  });
+});
+
+describe('prop', () => {
+  it('returns the property', () => {
+    const obj = { name: 'dingo', isFalse: false };
+    expect(prop('name', obj)).toBe('dingo');
+    expect(prop('isFalse', obj)).toBe(false);
+  });
+  it('returns undefined if obj is falsey', () => {
+    const obj = null;
+    expect(prop('name', obj)).toBe(undefined);
   });
 });
 
@@ -52,45 +89,8 @@ describe('safeGet', () => {
   });
 });
 
-describe('prop', () => {
-  it('returns the property', () => {
-    const obj = { name: 'dingo', isFalse: false };
-    expect(prop('name', obj)).toBe('dingo');
-    expect(prop('isFalse', obj)).toBe(false);
-  });
-  it('returns undefined if obj is falsey', () => {
-    const obj = null;
-    expect(prop('name', obj)).toBe(undefined);
-  });
-});
-
-describe('handleChangeEvent', () => {
-  it('returns an object { [name]: value } from event', () => {
-    const fakeEvent = {
-      target: {
-        name: 'nickname',
-        value: 'bobbytables',
-      },
-    };
-    const expected = { nickname: 'bobbytables' };
-    expect(handleChangeEvent(fakeEvent as any)).toStrictEqual(expected);
-  });
-});
-
 describe('trace', () => {
   it('returns the payload', () => {
     expect(trace('dingo', 42)).toBe(42);
-  });
-});
-
-describe('formatPhone', () => {
-  it('returns a formatted 10-digit phone number', () => {
-    const phone = '1231231234';
-    const expected = '(123) 123 - 1234';
-    expect(formatPhone(phone)).toBe(expected);
-  });
-  it('returns the existing number if less than 10 digits', () => {
-    const phone = '123123123';
-    expect(formatPhone(phone)).toBe(phone);
   });
 });

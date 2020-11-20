@@ -21,7 +21,7 @@ export const compose = (...fns: Function[]) => (x: any) =>
 export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
 // renderData :: a -> a | string
-export const renderData = (value: any) => (isNil(value) ? '' : value);
+export const defaultString = (value: any) => (isNil(value) ? '' : value);
 
 // set :: string a -> { [string]: a }
 export const set = curry((name: string, value: any) => ({ [name]: value }));
@@ -36,7 +36,7 @@ export const handleChangeEvent = compose(
 export function safeGet<T>(obj: T) {
   return function(property: keyof T) {
     return compose(
-      renderData,
+      defaultString,
       prop(property)
     )(obj);
   };
