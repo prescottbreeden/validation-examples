@@ -18,7 +18,7 @@ export const Button: React.FC<any> = (props) => {
   );
 };
 
-export const FlexColumn: React.FC = (props) => {
+export const FlexColumn: React.FC<any> = (props) => {
   return (
     <div className="form__group" {...props}>
       {props.children}
@@ -26,7 +26,7 @@ export const FlexColumn: React.FC = (props) => {
   );
 };
 
-export const FlexRow: React.FC = (props) => {
+export const FlexRow: React.FC<any> = (props) => {
   return (
     <div className="form__row" {...props}>
       {props.children}
@@ -34,7 +34,7 @@ export const FlexRow: React.FC = (props) => {
   );
 };
 
-export const Box: React.FC = (props) => {
+export const Box: React.FC<any> = (props) => {
   return (
     <div className="form__box" {...props}>
       {props.children}

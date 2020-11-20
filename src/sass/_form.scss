@@ -4,23 +4,23 @@
     width: 100%;
     align-content: center;
     margin-bottom: 2.4rem;
+    flex-wrap: wrap;
   }
 
   &__group {
     display: flex;
     flex-direction: column;
-    &:not(:last-child) {
-      margin-right: 1rem;
-    }
+    margin-right: 1rem;
   }
 
   &__label {
     font-weight: 500;
     line-height: 1.5;
+    margin-top: 0.8rem;
   }
 
   &__input {
-    margin-top: 0.8rem;
+    margin-top: 0.4rem;
     font-size: 2rem;
     height: 5.4rem;
     width: 100%;

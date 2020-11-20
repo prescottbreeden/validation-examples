@@ -17,8 +17,15 @@ body {
   margin: 2rem 4rem;
 }
 
+.display-box {
+  border: 2px solid #333;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
 .button {
-  margin-top: -1.4rem;
+  margin-top: 1.4rem;
   background-color: transparent;
   color: #007d89;
   font-size: 1.6rem;
@@ -57,23 +64,23 @@ body {
   width: 100%;
   align-content: center;
   margin-bottom: 2.4rem;
+  flex-wrap: wrap;
 }
 
 .form__group {
   display: flex;
   flex-direction: column;
-}
-.form__group:not(:last-child) {
   margin-right: 1rem;
 }
 
 .form__label {
   font-weight: 500;
   line-height: 1.5;
+  margin-top: 0.8rem;
 }
 
 .form__input {
-  margin-top: 0.8rem;
+  margin-top: 0.4rem;
   font-size: 2rem;
   height: 5.4rem;
   width: 100%;

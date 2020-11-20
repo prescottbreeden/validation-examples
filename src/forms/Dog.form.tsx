@@ -24,7 +24,6 @@ export const DogForm: React.FC<FormType<Dog>> = ({
   // -- component logic --
   const onDogChange = compose(
     onChange,
-    (dog: Dog) => ({ dog }),
     mergeDeepRight(data),
     handleChangeEvent
   );

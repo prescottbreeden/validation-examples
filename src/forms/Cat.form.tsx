@@ -24,7 +24,6 @@ export const CatForm: React.FC<FormType<Cat>> = ({
   // -- component logic --
   const onCatChange = compose(
     onChange,
-    (cat: Cat) => ({ cat }),
     mergeDeepRight(data),
     handleChangeEvent
   );

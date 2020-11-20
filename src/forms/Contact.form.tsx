@@ -15,6 +15,7 @@ import {
   handleChangeEvent,
   replaceItem,
 } from 'utilities/general.utils';
+import { Cat, Dog } from 'types/pet.type';
 
 export const ContactForm: React.FC<FormType<Contact>> = ({
   data,
@@ -41,7 +42,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     ),
     data
   );
-  const handleCheckbox = () => {
+  const handleIsSubscribed = () => {
     const state = mergeRight(data, { isSubcribed: !data.isSubcribed });
     validateIfTrue('subscriptionEmail', state.subscriptionEmail, state);
     onChange(state);
@@ -61,6 +62,15 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     });
     return onChange({ phones });
   };
+
+  const handleDog = compose(
+    onChange,
+    (dog: Dog) => ({ dog })
+  );
+  const handleCat = compose(
+    onChange,
+    (cat: Cat) => ({ cat })
+  );
 
   // -- lifecycle --
   useEffect(() => {
@@ -98,7 +108,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
           id="isSubcribed"
           name="isSubcribed"
           onBlur={handleOnBlur}
-          onChange={handleCheckbox}
+          onChange={handleIsSubscribed}
           type="checkbox"
           value={get('isSubcribed')}
         />
@@ -130,7 +140,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
       <FlexRow>
         <DogForm
           data={get('dog')}
-          onChange={onChange}
+          onChange={handleDog}
           resetValidation={resetValidation}
           submitFailed={submitFailed}
         />
@@ -138,7 +148,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
       <FlexRow>
         <CatForm
           data={get('cat')}
-          onChange={onChange}
+          onChange={handleCat}
           resetValidation={resetValidation}
           submitFailed={submitFailed}
         />
