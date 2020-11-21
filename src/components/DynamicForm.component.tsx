@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, FlexColumn, FlexRow, Icon } from 'layouts';
+import { Box, Button, FlexColumn, FlexRow } from 'layouts';
 import { idOrRandom } from 'utilities/general.utils';
 import { DynamicFormProps } from 'types/form.type';
 
@@ -23,20 +23,15 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
               resetValidation,
               submitFailed,
             })}
-            <Box>
-              <Icon
-                className="button--delete"
-                name="crossCircle"
-                onClick={() => removeForm(data)}
-                title="Remove"
-              />
+            <Box style={{ alignSelf: 'flex-end' }}>
+              <Button onClick={() => removeForm(data)}>Remove</Button>
             </Box>
           </FlexRow>
         ))}
       </FlexColumn>
       <FlexRow>
         <Button onClick={addForm} className="button form__btn--add">
-          + Add New Phone
+          Add
         </Button>
       </FlexRow>
     </>

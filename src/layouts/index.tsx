@@ -1,5 +1,4 @@
 import React from 'react';
-export * from './Icon.layout';
 export * from './Input.layout';
 
 export const Label: React.FC<any> = (props) => {

@@ -20,18 +20,4 @@
     border: 0.1rem solid transparent;
     color: #fff;
   }
-
-  &--delete {
-    height: 2.5rem;
-    width: 2.5rem;
-    position: absolute;
-    top: 4.35rem;
-    z-index: 6;
-    fill: $color-red;
-    overflow: hidden;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }
