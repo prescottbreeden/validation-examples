@@ -60,7 +60,7 @@ export const ContactForm: React.FC<FormType<Contact>> = ({
     const phones = data.phones.filter((p2: Phone) => {
       return p1.id !== p2.id;
     });
-    return onChange({ phones });
+    onChange({ phones });
   };
 
   // -- lifecycle --
