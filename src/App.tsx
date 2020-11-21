@@ -8,11 +8,8 @@ import { CreatePhone } from 'components/CreatePhone.component';
 function App() {
   return (
     <div className="App">
-      <h1>Validation Demo</h1>
-      <p>
-        Tab through the fields to trigger validations on blur and edit to see
-        errors get removed.
-      </p>
+      <h1>De-formed-validations Examples</h1>
+      <p>Tab through fields or click submit to trigger validations.</p>
       <Box className="display-box">
         <p className="u-align-right">phone.form.tsx</p>
         <CreatePhone />
@@ -35,8 +32,8 @@ function App() {
         <div className="u-align-right">
           <p>contact.form.tsx</p>
           <p>phone.form.tsx</p>
-          <p>cat.form.tsx</p>
           <p>dog.form.tsx</p>
+          <p>cat.form.tsx</p>
         </div>
         <CreateContact />
       </Box>
